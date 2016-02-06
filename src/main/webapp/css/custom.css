@@ -46,3 +46,7 @@ line {
 .keyword {
   color: #00c;
 }
+
+.dataTables_wrapper {
+  padding-top: 4em;
+}

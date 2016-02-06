@@ -13,22 +13,22 @@
          "winners": [
              {
                  "name" : "Team A",
-                 "year : 2015
+                 "year" : 2015
              },
              {
                  "name" : "Team C",
-                 "year : 2014
+                 "year" : 2014
              }
              
          ],
          "cities": [
              {
                  "name" : "Hong Kong",
-                 "year : 2015
+                 "year" : 2015
              },
              {
                  "name" : "Berlin",
-                 "year : 2014
+                 "year" : 2014
              }
              ]
       },
@@ -42,22 +42,22 @@
          "winners": [
              {
                  "name" : "Team E",
-                 "year : 2012
+                 "year" : 2012
              },
              {
                  "name" : "Team G",
-                 "year : 2013
+                 "year" : 2013
              }
              
          ],
          "cities": [
              {
                  "name" : "Paris",
-                 "year : 2012
+                 "year" : 2012
              },
              {
                  "name" : "Paris",
-                 "year : 2013
+                 "year" : 2013
              }
              ]
       }

@@ -25,24 +25,9 @@
     <div id="header"></div>
 
     <div class="container">
-      <!-- Table -->
-      <table class="table" id="table_competitions">
-        <thead>
-          <tr>
-            <th> Name </th>
-            <th> # of Teams </th>
-            <th> Type </th>
-            <th> Games Played </th>
-            <th> Winners by Year </th>
-            <th> Cities by Year </th>
-          </tr> 
-        </thead>
-        <tbody>
-            <!-- content will be loaded by loadTable() -->
-        </tbody>
-      </table>
+      Hello World
     </div><!-- /.container -->
-      
+        
     <div id="footer"></div>
         
         
@@ -53,7 +38,7 @@
     <!-- Datatables -->
     <script type="text/javascript" src="https://cdn.datatables.net/s/bs/dt-1.10.10,r-2.0.0/datatables.min.js"></script>
     <!-- Custom JS -->
-    <script type="text/javascript" src="js/loadCompetitions.js"></script>
+    <script type="text/javascript" src="js/loadTeams.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     
   
@@ -64,10 +49,6 @@
         $("#footer").load("footer.html"); 
       });
         
-      // Load specific table
-      $(document).ready( function () {
-        loadCompetitions('#table_competitions', "json/competition.json");
-      } );
     </script> 
   </body>
 </html>

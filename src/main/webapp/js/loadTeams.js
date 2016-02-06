@@ -7,6 +7,9 @@ function loadTeam(table, json) {
             "dataSrc": function ( json ) {
       for ( var i=0, ien=json.data.length ; i<ien ; i++ ) {
           
+    	  // Insert link for team
+    	  json.data[i].name = '<a href="/team.html?query='+json.data[i].name+'">'+json.data[i].name+'</a>';
+    	  
           // Parse games (multivalues) into string
           if(typeof(json.data[i].games) == "undefined"){
               json.data[i].games = "None";
