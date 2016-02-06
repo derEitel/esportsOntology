@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>eSports Competition Ontology</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+      
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+    
+    <!-- Datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs/dt-1.10.10,r-2.0.0/datatables.min.css"/>
+      
+    
+  </head>
+    
+  <body>
+      
+    <div id="header"></div>
+
+    <div class="container">
+      <!-- Table -->
+      <table class="table" id="table_teams">
+        <thead>
+          <tr>
+            <th> Name </th>
+            <th> Size </th>
+            <th> Titles Won </th>
+            <th> Games Playing </th>
+            <th> Competitions participating </th>
+          </tr> 
+        </thead>
+        <tbody>
+            <!-- content will be loaded by loadTable() -->
+        </tbody>
+      </table>
+    </div><!-- /.container -->
+        
+    <div id="footer"></div>
+        
+        
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- Datatables -->
+    <script type="text/javascript" src="https://cdn.datatables.net/s/bs/dt-1.10.10,r-2.0.0/datatables.min.js"></script>
+    <!-- Custom JS -->
+    <script type="text/javascript" src="js/loadTeams.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    
+  
+    <script> 
+      // load header and footer from outside
+      $(function(){
+        $("#header").load("header.html"); 
+        $("#footer").load("footer.html"); 
+      });
+        
+      // Load specific table
+      $(document).ready( function () {
+        loadTeam('#table_teams', "json/team.json");
+      } );
+    </script> 
+  </body>
+</html>

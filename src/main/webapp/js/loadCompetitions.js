@@ -1,0 +1,52 @@
+function loadCompetitions(table, json) {
+    
+    // load the json received into the datatable
+    $(table).dataTable( {
+        "ajax": {
+            "url" : json,
+            "dataSrc": function ( json ) {
+      for ( var i=0, ien=json.data.length ; i<ien ; i++ ) {
+          
+          // Parse games (multivalues) into string
+          if(typeof(json.data[i].games) == "undefined"){
+              json.data[i].games = "None";
+          }
+          else{
+              var games = json.data[i].games[0].name;
+              if(json.data[i].games.length > 1){
+                for (var j = 1; j < json.data[i].games.length; j++){
+                  games = games + ", " +  json.data[i].games[j].name;
+                }
+              }
+              json.data[i].games = games;
+          }
+          
+          // Parse winners (multivalues) into string
+          if(typeof(json.data[i].winners) == "undefined"){
+              json.data[i].winners = "None";
+          }
+          else{
+              var winners = json.data[i].winners[0].name + " (" + json.data[i].winners[0].year + ") ";
+              if(json.data[i].competitions.length > 1){
+                for (var j = 1; j < json.data[i].winners.length; j++){
+                  winners = winners + ", " +  json.data[i].winners[j].name + " (" + json.data[i].winners[0].year + ") ";
+                }
+              }
+              json.data[i].winners = winners;
+          }
+      }
+      return json.data;
+    }
+        },
+        "columns": [
+            { "data": "name" },
+            { "data": "teams" },
+            { "data": "type" },
+            { "data": "games" },
+            { "data": "winners"},
+            { "data": "cities"}
+        ]
+        
+    } );
+    
+}
