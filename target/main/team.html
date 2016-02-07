@@ -24,42 +24,42 @@
       
     <div id="header"></div>
 
-	<!-- ### Competition information ### -->
+	<!-- ### Team information ### -->
 	
     <div class="container">
       <div class="row">
-        <div id="competition_name"><h1>League of Legends 2015 World Championship series</h1> </div>
+        <div id="team_name"><h1>Fnatic</h1> </div>
       </div>
       <div class="row">
-  	    <div class="col-md-4" id="competition_logo">
-  	      <img src="http://hydra-media.cursecdn.com/lol.gamepedia.com/thumb/3/38/Logo_worlds_2015.png/126px-Logo_worlds_2015.png?version=2112262f743071ae74d97f0ba36dbafd">
+  	    <div class="col-md-4" id="team_logo">
+  	      <img src="http://t1.gstatic.com/images?q=tbn:ANd9GcTD362czptU0xpVdpVp-B1KLdtyyA9gDREeF0Bb9jSEwm8OndyCaLhYuJo">
   	    </div>
-  	    <div class="col-md-8 2nd-row" id="competition_desc">
-  	      The 2015 World Championship series, will follow up the Riot - World Championship 2014. It will be held in 4 different locations throughout Western Europe.
+  	    <div class="col-md-8" id="team_desc">
+  	      Fnatic is a professional electronic sports team headquartered in London. Founded July 23, 2004, Fnatic has a number of esports teams on its roster, including one of the world's best Counter-Strike team. and one of the best League of Legends teams in the World. Fnatic operate a dedicated gaming house for its League of Legends team based in Berlin, Germany. Fnatic also operate an independent digital agency, Sannpa, for businesses looking to be involved with Esports.
   	    </div>
       </div> <!-- /row  -->
       <div class="row">
-        <div class="col-md-2" id="competition_basics_tags">
+        <div class="col-md-2" id="team_basics_tags">
           <b>Information </b> <br>
-          Type: <br>
-          Number of Teams: <br>
+          Location: <br>
+          Number of Players: <br>
           Website: <br>
         </div>
-        <div class="col-md-2" id="competition_basics">
+        <div class="col-md-2" id="team_basics">
           <br>
-          <div align="right" id="competition_type">K.O.</div>
-          <div align="right" id="competition_num">16</div>
-          <div align="right" id="competition_website"><a href="http://www.fnatic.com/">www.fnatic.com</a></div> <br>
+          <div align="right" id="team_location">Europe</div>
+          <div align="right" id="team_num">7</div>
+          <div align="right" id="team_website"><a href="http://www.fnatic.com/">www.fnatic.com</a></div> <br>
         </div>
-        <div class="col-md-8 2nd-row" id="competition_history">
-          <h2>History:</h2>
+        <div class="col-md-8" id="team_players">
+          <h2>Players:</h2>
           <!-- Table -->
-	      <table class="table" id="table_competition_history">
+	      <table class="table" id="table_team_players">
 	        <thead>
 	          <tr>
-	            <th> Date </th>
-	            <th> Location </th>
-	            <th> Winner </th>
+	            <th> Nick </th>
+	            <th> First name </th>
+	            <th> Last name </th>
 	          </tr> 
 	        </thead>
 	        <tbody>
@@ -78,8 +78,8 @@
         </div>
       </div> <!-- /row  -->
       <div class="row">
-        <div class="col-md-8 col-md-offset-4 2nd-row" id="team_competitions">
-          <h2>Teams participated:</h2>
+        <div class="col-md-8 col-md-offset-4" id="team_competitions">
+          <h2>Competitions participated:</h2>
           <!-- Table -->
 	      <table class="table" id="table_team_competitions">
 	        <thead>
@@ -107,32 +107,10 @@
 	      </table>
         </div>
       </div><!-- /row  -->
-      
-      <!-- Timeline for Tweets -->
       <div class="row">
-        <div class="col-md-6">
-          <h1 style="text-align: center;">Current Tweets</h1>
-        </div>
-        <div class="col-md-12">
-      	<ul id="teamTimeline" class="timeline">
-      	<template id="mytemplate">
-  		  <li>
-          <div class="timeline-badge info"><i class="glyphicon glyphicon-pencil"></i></div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-              <p><i class="glyphicon glyphicon-time" style="margin-right: 5px;"></i><small class="text-muted"> 11 hours ago via Twitter</small></p>
-            </div>
-            <div class="timeline-body">
-              <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
-            </div>
-          </div>
-        </li>
-		</template>
+      	<ul id="myTimeline" class="timeline">
       	</ul>
-      	</div>
-      </div><!-- /row end timeline-->
-      
+      </div><!-- /row -->
     </div><!-- /.container -->
         
     <div id="footer"></div>
@@ -156,19 +134,20 @@
       });
         
       //fill timeline with tweets
-      $.getJSON( "rest/tweets/" + getQueryVariable("query"), function( data ) {
-	    var items = [];
-	  	for (var key in data){
-		  var content = document.querySelector('#mytemplate').content;
-		  // Populate the timeline at runtime using a template
-		  var clone = document.importNode(content, true);
-		  clone.querySelector('.timeline-title').textContent = data[key].user.screenName;
-		  clone.querySelector('.text-muted').textContent = data[key].createdAt;
-		  clone.querySelector('.timeline-body').textContent = data[key].text;
-		
-		  document.querySelector('#teamTimeline').appendChild(clone);
-	  }
+      $.getJSON( "rest/twitter/superbowl", function( data ) {
+	  var items = [];
+	  $.each( data, function( data.user.screenName ) {
+		document.getElementById("myTimeline").appendChild("<li>" + data.user.screenName + "</li>" )
+	    //items.push( "<li id='" + key + "'>" + val + "</li>" );
 	  });
+	  /*
+	  $( "<ul/>", {
+	    "class": "my-new-list",
+	    html: items.join( "" )
+	  }).appendTo( "body" );
+	  */
+	});
+      
     </script> 
   </body>
 </html>

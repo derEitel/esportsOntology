@@ -11,6 +11,10 @@ body {
   top: 0;
 }
 
+svg{
+	padding-left: 20em;
+}
+
 .hint {
   position: absolute;
   right: 0;
@@ -45,4 +49,27 @@ line {
 
 .keyword {
   color: #00c;
+}
+
+.dataTables_wrapper {
+  padding-top: 4em;
+}
+
+/* individuals team/competition page */
+#team_desc, #competition_desc {
+	margin-top: 20px;
+	padding-left: 3em;
+}
+
+#team_players, #team_competitions, #competition_players, #competition_history {
+	padding-left: 3em;
+}
+
+
+#team_basics_tags, #team_basics, #competition_basics_tags, #competition_basics {
+	margin-top: 10px;
+}
+
+#team_logo, #competition_logo {
+	text-align: center;
 }
