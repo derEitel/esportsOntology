@@ -29,10 +29,10 @@ function loadTeam(table, json) {
               json.data[i].competitions = "None";
           }
           else{
-              var comps = json.data[i].competitions[0].name;
+              var comps = '<a href="/competition.html?query='+json.data[i].competitions[0].name+'">'+json.data[i].competitions[0].name+'</a>';
               if(json.data[i].competitions.length > 1){
                 for (var j = 1; j < json.data[i].competitions.length; j++){
-                  comps = comps + ", " +  json.data[i].competitions[j].name;
+                  comps = comps + ", " +  '<a href="/competition.html?query='+json.data[i].competitions[j].name+'">'+json.data[i].competitions[j].name+'</a>';
                 }
               }
               json.data[i].competitions = comps;

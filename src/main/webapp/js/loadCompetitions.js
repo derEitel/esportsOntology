@@ -7,6 +7,9 @@ function loadCompetitions(table, json) {
             "dataSrc": function ( json ) {
       for ( var i=0, ien=json.data.length ; i<ien ; i++ ) {
           
+    	  // Insert link for team
+    	  json.data[i].name = '<a href="/competition.html?query='+json.data[i].name+'">'+json.data[i].name+'</a>';
+    	  
           // Parse competitions (multivalues) into string
           if(typeof(json.data[i].games) == "undefined"){
               json.data[i].games = "None";
@@ -26,10 +29,10 @@ function loadCompetitions(table, json) {
               json.data[i].winners = "None";
           }
           else{
-              var winners = json.data[i].winners[0].name + " (" + json.data[i].winners[0].year + ") ";
+              var winners = '<a href="/team.html?query='+json.data[i].winners[0].name+'">'+json.data[i].winners[0].name+'</a>' + " (" + json.data[i].winners[0].year + ") ";
               if(json.data[i].winners.length > 1){
                 for (var j = 1; j < json.data[i].winners.length; j++){
-                  winners = winners + ", " +  json.data[i].winners[j].name + " (" + json.data[i].winners[0].year + ") ";
+                  winners = winners + ", " +  '<a href="/team.html?query='+json.data[i].winners[0].name+'">'+json.data[i].winners[0].name+'</a>' + " (" + json.data[i].winners[0].year + ") ";
                 }
               }
               json.data[i].winners = winners;
