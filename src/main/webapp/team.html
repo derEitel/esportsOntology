@@ -28,11 +28,11 @@
 	
     <div class="container">
       <div class="row">
-        <div id="team_name"><h1>Fnatic</h1> </div>
+        <div><h1 id="team_name">Fnatic</h1> </div>
       </div>
       <div class="row">
-  	    <div class="col-md-4" id="team_logo">
-  	      <img src="http://t1.gstatic.com/images?q=tbn:ANd9GcTD362czptU0xpVdpVp-B1KLdtyyA9gDREeF0Bb9jSEwm8OndyCaLhYuJo">
+  	    <div class="col-md-4" >
+  	      <img id="team_logo" src="http://t1.gstatic.com/images?q=tbn:ANd9GcTD362czptU0xpVdpVp-B1KLdtyyA9gDREeF0Bb9jSEwm8OndyCaLhYuJo">
   	    </div>
   	    <div class="col-md-8" id="team_desc">
   	      Fnatic is a professional electronic sports team headquartered in London. Founded July 23, 2004, Fnatic has a number of esports teams on its roster, including one of the world's best Counter-Strike team. and one of the best League of Legends teams in the World. Fnatic operate a dedicated gaming house for its League of Legends team based in Berlin, Germany. Fnatic also operate an independent digital agency, Sannpa, for businesses looking to be involved with Esports.
@@ -51,9 +51,9 @@
           <div align="right" id="team_num">7</div>
           <div align="right" id="team_website"><a href="http://www.fnatic.com/">www.fnatic.com</a></div> <br>
         </div>
+<!-- 
         <div class="col-md-8" id="team_players">
           <h2>Players:</h2>
-          <!-- Table -->
 	      <table class="table" id="table_team_players">
 	        <thead>
 	          <tr>
@@ -76,11 +76,12 @@
 	        </tbody>
 	      </table>
         </div>
+         -->
       </div> <!-- /row  -->
+      <!-- 
       <div class="row">
         <div class="col-md-8 col-md-offset-4" id="team_competitions">
-          <h2>Competitions participated:</h2>
-          <!-- Table -->
+          <h2>Competitions won:</h2>
 	      <table class="table" id="table_team_competitions">
 	        <thead>
 	          <tr>
@@ -106,7 +107,8 @@
 	        </tbody>
 	      </table>
         </div>
-      </div><!-- /row  -->
+      </div>
+       -->
       <!-- Timeline for Tweets -->
       <div class="row">
         <div class="col-md-6">
@@ -150,9 +152,19 @@
       // load header and footer from outside
       $(function(){
         $("#header").load("header.html"); 
-        //$("#footer").load("footer.html"); 
-      });
+        //$("#footer").load("footer.html");
         
+        
+        
+      });
+      $.getJSON( "rest/team/" + getQueryVariable("query"), function( data ) {
+    	  document.getElementById("team_location").innerHTML = data.location;
+    	  document.getElementById("team_num").innerHTML = data.size;
+    	  document.getElementById("team_website").innerHTML = '<a href="' + data.website + '"> ' + data.website + ' </a>';
+    	  document.getElementById("team_desc").innerHTML = data.abstract;
+    	  document.getElementById("team_logo").src = data.photo;
+    	  document.getElementById("team_name").innerHTML = data.name;
+      });
       
       //fill timeline with tweets
       $.getJSON( "rest/tweets/" + getQueryVariable("query"), function( data ) {

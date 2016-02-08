@@ -22,7 +22,6 @@ public class TwitterHandler {
 		TwitterAPIConsumer consumer = new TwitterAPIConsumer();
 		List<Status> tweets = consumer.getTweets(name);
 		//String[] result = new String[10];
-		System.out.println(tweets.get(0).getText());
 		String text = "";
 		if(tweets.isEmpty()){
 			return Response.status(200).entity("No tweets for that keyword").build();
