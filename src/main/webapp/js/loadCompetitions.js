@@ -5,7 +5,7 @@ function loadCompetitions(table, json) {
         "ajax": {
             "url" : json,
             "dataSrc": function ( json ) {
-    	      	json = json.firstName;
+    	      	json = json.competitions;
     	    	
     	    	json = JSON.parse(json);
     	    	
