@@ -1,0 +1,26 @@
+prefix esports: <http://www.eitel-lopez.org/e-sports#>
+prefix foaf: <http://xmlns.com/foaf/0.1/#>
+prefix geonames: <http://www.geonames.org/ontology/ontology_v3.1.rdf#>
+
+select distinct ?name ?games ?type ?events ?winners ?cities  ?date where {
+   ?c esports:hasName ?name;
+       esports:hasEvent ?e;
+       esports:hasWeb ?type.
+   ?w esports:hasWon ?c;
+        esports:hasName ?winners.
+   ?e esports:hasDate ?date;
+       geonames:locatedIn ?f.
+   ?f  geonames:name ?cities.
+   {
+      select ?c (group_concat( ?event ; separator = ", ") AS ?events) where {
+           ?c esports:hasERound ?e.
+           ?e esports:hasName ?event
+      } group by ?c
+   }
+   {
+      select ?c (group_concat( ?sport ; separator = ", ") AS ?games) where {
+           ?c esports:isECompetitionOf ?s.
+           ?s esports:hasName ?sport.
+      } group by ?c
+   }
+}

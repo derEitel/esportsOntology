@@ -22,13 +22,13 @@ public class UserService {
 
     public User getDefaultUser() {
         User user = new User();
-        user.setFirstName("JonFromREST");
-        user.setLastName(queryJSON().toString());
+        user.setFirstName(queryJSON("competitionsQuery.txt").toString());
+        user.setLastName(queryJSON("teamsRankingDefinitive.txt").toString());
         
         return user;
     }
 
-    public JSONObject queryJSON() {
+    public JSONObject queryJSON(String path) {
 		Graph g = Graph.create(true);
 		Load ld = Load.create(g);
 		try {
@@ -39,11 +39,11 @@ public class UserService {
 		} catch (LoadException le) {
 			System.out.println("Error loading: " + le.toString());
 		}
-
+		
 		String query = "";
 		try {
 			query = new String(Files.readAllBytes(Paths
-					.get("ontology/teamsRankingDefinitive.txt")));
+					.get("ontology/"+path)));
 		} catch (IOException ioe) {
 			System.out.println("Error reading the query: " + ioe.toString());
 		}

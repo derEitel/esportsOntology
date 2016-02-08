@@ -124,6 +124,11 @@
     <rdfs:label xml:lang="fr">nom</rdfs:label>
   </owl:ObjectProperty>
   
+  <owl:ObjectProperty rdf:ID="hasWeb">
+    <rdfs:label xml:lang="en">web</rdfs:label>
+    <rdfs:label xml:lang="fr">web</rdfs:label>
+  </owl:ObjectProperty>
+  
   <owl:Class rdf:ID="Videogame">
     <rdfs:comment xml:lang="en">
       A videogame is an electronic game that involves human interaction with 
@@ -448,7 +453,7 @@
     <rdfs:comment xml:lang="en">
       This property sets the date of any variety of sports event
     </rdfs:comment>
-    <rdfs:range rdf:resource="&dc;date" />
+    <rdfs:subClassOf rdf:resource="&dc;date" />
     <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
   </owl:ObjectProperty>
   
@@ -482,7 +487,7 @@
 	  <VideoConsole rdf:about="#PC" />
     </owl:distinctMembers>
   </owl:AllDifferent>
-  
+ 
   <VideoGame rdf:ID="LeagueOfLegends">
 	 <playInConsole rdf:resource="#PC" />
   </VideoGame>
@@ -537,9 +542,7 @@
 	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">90</hasPoints>
 	<hasEvent>
 	  <Event rdf:ID="EULCSSPRINGPlayoffs">
-	    <hasDate>
-	      <dc:date>2015-03-30</dc:date>
-	    </hasDate>
+	    <hasDate>2015-03-30</hasDate>
 	    <geonames:locatedIn>
 	      <geonames:Feature>
 	        <geonames:name>Europe</geonames:name>
@@ -547,9 +550,7 @@
 	    </geonames:locatedIn>
 	  </Event>
 	</hasEvent>
-	<foaf:homepage>
-      <foaf:document rdf:ID="http://euw.lolesports.com/" />
-	</foaf:homepage>
+	<hasWeb>http://euw.lolesports.com/</hasWeb>
 	<hasERound rdf:resource="#QuarterFinals" />
 	<hasERound rdf:resource="#SemiFinals" />
 	<hasERound rdf:resource="#Final" />
@@ -561,9 +562,7 @@
 	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">50000</hasPoints>
 	<hasEvent>
 	  <Event rdf:ID="EULCSSUMMERPlayoffs">
-	    <hasDate>
-	      <dc:date>2015-05-28</dc:date>
-	    </hasDate>
+	    <hasDate>2015-05-28</hasDate>
 	    <geonames:locatedIn>
 	      <geonames:Feature>
 	        <geonames:name>Europe</geonames:name>
@@ -571,9 +570,7 @@
 	    </geonames:locatedIn>
 	  </Event>
 	</hasEvent>
-	<foaf:homepage>
-      <foaf:document rdf:ID="http://euw.lolesports.com/" />
-	</foaf:homepage>
+	<hasWeb>http://euw.lolesports.com/</hasWeb>
 	<hasERound rdf:resource="#QuarterFinals" />
 	<hasERound rdf:resource="#SemiFinals" />
 	<hasERound rdf:resource="#Final" />
@@ -585,9 +582,7 @@
 	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</hasPoints>
 	<hasEvent>
 	  <Event rdf:ID="EUNASUMMERPlayoffs">
-	    <hasDate>
-	      <dc:date>2015-05-30</dc:date>
-	    </hasDate>
+	    <hasDate>-05-30</hasDate>
 	    <geonames:locatedIn>
 	      <geonames:Feature>
 	        <geonames:name>USA</geonames:name>
@@ -595,9 +590,7 @@
 	    </geonames:locatedIn>
 	  </Event>
 	</hasEvent>
-	<foaf:homepage>
-      <foaf:document rdf:ID="http://na.lolesports.com/" />
-	</foaf:homepage>
+	<hasWeb>http://na.lolesports.com/</hasWeb>
 	<hasERound rdf:resource="#QuarterFinals" />
 	<hasERound rdf:resource="#SemiFinals" />
 	<hasERound rdf:resource="#Final" />
@@ -609,9 +602,7 @@
 	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">10000</hasPoints>
 	<hasEvent>
 	  <Event rdf:ID="Azubu">
-	    <hasDate>
-	      <dc:date>2012-07-04</dc:date>
-	    </hasDate>
+	    <hasDate>2012-07-04</hasDate>
 	    <geonames:locatedIn>
 	      <geonames:Feature>
 	        <geonames:name>South Corea</geonames:name>
@@ -619,9 +610,7 @@
 	    </geonames:locatedIn>
 	  </Event>
 	</hasEvent>
-	<foaf:homepage>
-      <foaf:document rdf:ID="http://www.ognlol.com/" />
-	</foaf:homepage>
+	<hasWeb>http://www.ognlol.com/</hasWeb>
 	<hasERound rdf:resource="#QuarterFinals" />
 	<hasERound rdf:resource="#SemiFinals" />
 	<hasERound rdf:resource="#Final" />
@@ -633,9 +622,7 @@
 	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">50000</hasPoints>
 	<hasEvent>
 	  <Event rdf:ID="EULCSSpringPromo">
-	    <hasDate>
-	      <dc:date>2016</dc:date>
-	    </hasDate>
+	    <hasDate>2016</hasDate>
 	    <geonames:locatedIn>
 	      <geonames:Feature>
 	        <geonames:name>Europe</geonames:name>
@@ -643,9 +630,7 @@
 	    </geonames:locatedIn>
 	  </Event>
 	</hasEvent>
-	<foaf:homepage>
-      <foaf:document rdf:ID="http://www.riotgames.com/" />
-	</foaf:homepage>
+	<hasWeb>http://www.riotgames.com/</hasWeb>
 	<hasERound rdf:resource="#Final" />
   </ECompetition>
   
@@ -655,9 +640,7 @@
 	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">100000</hasPoints>
 	<hasEvent>
 	  <Event rdf:ID="IEMSeasonIX">
-	    <hasDate>
-	      <dc:date>2015-03-12</dc:date>
-	    </hasDate>
+	    <hasDate>2015-03-12</hasDate>
 	    <geonames:locatedIn>
 	      <geonames:Feature>
 	        <geonames:name>Europe</geonames:name>
@@ -665,9 +648,7 @@
 	    </geonames:locatedIn>
 	  </Event>
 	</hasEvent>
-	<foaf:homepage>
-      <foaf:document rdf:ID="http://intelextrememasters.com/" />
-	</foaf:homepage>
+	<hasWeb>http://intelextrememasters.com/</hasWeb>
 	<hasERound rdf:resource="#Final" />
   </ECompetition>
   
@@ -702,9 +683,7 @@
   
   <ETeam rdf:ID="&dbpedia;Fnatic">
 	<hasName>Fnatic</hasName>
-	<foaf:homepage>
-	  <foaf:document rdf:ID="http://www.fnatic.com" />
-	</foaf:homepage>
+	<hasWeb>http://www.fnatic.com</hasWeb>
 	<playInConsole rdf:resource="#PS2" />
 	<hasWon rdf:resource="#EULCSSPRING" />
 	<hasWon rdf:resource="#EULCSSUMMER" />
@@ -752,9 +731,7 @@
   
   <ETeam rdf:ID="&dbpedia;Team_Liquid">
 	<hasName>Team Liquid</hasName>
-	<foaf:homepage>
-	  <foaf:document rdf:ID="http://www.liquidlegends.net/" />
-	</foaf:homepage>
+	<hasWeb>http://www.liquidlegends.net/</hasWeb>
 	<hasWon rdf:resource="#EULCSSUMMER" />
 	<foaf:member>
 	  <EPlayer rdf:ID="Lourlo">
@@ -801,9 +778,7 @@
   <ETeam rdf:ID="&dbpedia;Natus_Vincere">
     <hasName>Natus Vincere</hasName>
 	<hasWon rdf:resource="#Azubu" />
-    <foaf:homepage>
-  	  <foaf:document rdf:ID="http://navi-gaming.com/en" />
-    </foaf:homepage>
+    <hasWeb>http://navi-gaming.com/en</hasWeb>
     <foaf:member>
   	  <EPlayer rdf:ID="Jwaow">
 	    <foaf:geekcode>Jwaow</foaf:geekcode>
@@ -858,9 +833,7 @@
 	<hasName>SKGaming</hasName>
 	<hasWon rdf:resource="#IEMSeasonIX" />
 	<hasWon rdf:resource="#EULCSSpringPromo" />
-	<foaf:homepage>
-      <foaf:document rdf:ID="http://www.sk-gaming.com/" />
-	</foaf:homepage>
+	<hasWeb>http://www.sk-gaming.com/</hasWeb>
 	<foaf:member>
       <EPlayer rdf:ID="Morsu">
         <foaf:geekcode>Morsu</foaf:geekcode>
@@ -902,4 +875,5 @@
       </EPlayer>
 	</foaf:member>
   </ETeam>
+  
 </rdf:RDF>
