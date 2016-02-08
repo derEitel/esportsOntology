@@ -1,10 +1,14 @@
 prefix esports: <http://www.eitel-lopez.org/e-sports#>
 prefix foaf: <http://xmlns.com/foaf/0.1/#>
+prefix ont: <http://dbpedia.org/ontology/>
+prefix type: <http://dbpedia.org/class/yago/>
+prefix prop: <http://dbpedia.org/property/>
 
-select distinct ?games ?name ?size ?won ?competitions  where{
+select distinct ?games ?name ?size ?won ?competitions ?abstract ?photo where{
   ?c esports:isECompetitionOf ?e.
   ?e esports:hasName ?games.
-  ?team esports:hasName ?name.
+  ?team esports:hasName ?name;
+            esports:hasUri ?teamUri.
   {
      select ?team (sum(?points) as ?won) where {
         ?team esports:hasWon ?competition.
@@ -21,5 +25,16 @@ select distinct ?games ?name ?size ?won ?competitions  where{
          ?team esports:hasWon ?c.
          ?c esports:hasName ?competitionsName
       } group by ?team
-  }
+ }
+ {
+    select  ?est ?abstract ?photo where {
+      service <http://dbpedia.org/sparql> {
+         ?est a type:ElectronicSportsTeams.
+         ?est ont:abstract ?abstract.
+         optional {?est prop:hasPhotoCollection ?photo}
+         filter (langMatches(lang(?abstract),"en") )
+     }
+   }
+ }
+ filter (str(?est) = str(?teamUri))
 }

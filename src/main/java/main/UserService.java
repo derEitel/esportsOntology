@@ -1,11 +1,11 @@
 package main;
 
+import main.User;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
 
-import main.User;
 import fr.inria.acacia.corese.exceptions.EngineException;
 import fr.inria.edelweiss.kgram.core.Mappings;
 import fr.inria.edelweiss.kgraph.core.*;
@@ -64,6 +64,7 @@ public class UserService {
 		// cumulative variable
 		JSONArray resultsArray = new JSONArray();
 		// gathering the results
+		System.out.println("que pollas pasa: "+originalJson);
 		Iterator<Object> resultsIterator = originalJson.getJSONObject("sparql")
 				.getJSONObject("results").getJSONArray("result").iterator();
 		while (resultsIterator.hasNext()) {
@@ -75,7 +76,17 @@ public class UserService {
 				// reconstructing the json
 				JSONObject temp = (JSONObject) bindingsIterator.next();
 				String key = temp.getString("name");
-				Object value = temp.getJSONObject("literal").get("content");
+				Object value = null;
+				try {
+					if (temp.names().get(1).toString().equals("literal"))
+						value = temp.getJSONObject("literal").get("content");
+					else if (temp.names().get(1).toString().equals("uri"))
+						value = temp.getString("uri");
+					else throw new Exception ("Value not supported yet.");
+				} catch (Exception e) {
+					System.out.println("Exception while parsing the content: "+e.toString());
+				}
+				
 				newValue.put(key, value);
 			}
 			resultsArray.put(newValue);

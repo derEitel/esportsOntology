@@ -129,6 +129,11 @@
     <rdfs:label xml:lang="fr">web</rdfs:label>
   </owl:ObjectProperty>
   
+  <owl:ObjectProperty rdf:ID="hasUri">
+    <rdfs:label xml:lang="en">uri</rdfs:label>
+    <rdfs:label xml:lang="fr">uri</rdfs:label>
+  </owl:ObjectProperty>
+  
   <owl:Class rdf:ID="Videogame">
     <rdfs:comment xml:lang="en">
       A videogame is an electronic game that involves human interaction with 
@@ -683,6 +688,7 @@
   
   <ETeam rdf:ID="&dbpedia;Fnatic">
 	<hasName>Fnatic</hasName>
+	<hasUri>http://dbpedia.org/resource/Fnatic</hasUri>
 	<hasWeb>http://www.fnatic.com</hasWeb>
 	<playInConsole rdf:resource="#PS2" />
 	<hasWon rdf:resource="#EULCSSPRING" />
@@ -731,6 +737,7 @@
   
   <ETeam rdf:ID="&dbpedia;Team_Liquid">
 	<hasName>Team Liquid</hasName>
+	<hasUri>http://dbpedia.org/resource/Team_Liquid</hasUri>
 	<hasWeb>http://www.liquidlegends.net/</hasWeb>
 	<hasWon rdf:resource="#EULCSSUMMER" />
 	<foaf:member>
@@ -777,6 +784,7 @@
   
   <ETeam rdf:ID="&dbpedia;Natus_Vincere">
     <hasName>Natus Vincere</hasName>
+	<hasUri>http://dbpedia.org/resource/Natus_Vincere</hasUri>
 	<hasWon rdf:resource="#Azubu" />
     <hasWeb>http://navi-gaming.com/en</hasWeb>
     <foaf:member>
@@ -831,6 +839,7 @@
   
   <ETeam rdf:ID="&dbpedia;SK_Gaming">
 	<hasName>SKGaming</hasName>
+	<hasUri>http://dbpedia.org/resource/SK_Gaming</hasUri>
 	<hasWon rdf:resource="#IEMSeasonIX" />
 	<hasWon rdf:resource="#EULCSSpringPromo" />
 	<hasWeb>http://www.sk-gaming.com/</hasWeb>
