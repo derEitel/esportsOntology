@@ -1,6 +1,6 @@
 package main;
 
-import main.User;
+import main.Result;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,13 +18,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
 
-public class UserService {
+public class ResultService {
 
-    public User getDefaultUser() {
-        User user = new User();
-        user.setFirstName(queryJSON("competitionsQuery.txt").toString());
-        user.setLastName(queryJSON("teamsRankingDefinitive.txt").toString());
-        
+    public Result getDefaultResult() {
+        Result user = new Result();
+        user.setCompetitions(queryJSON("competitionsQuery.txt").toString());
+        user.setTeams(queryJSON("teamsQuery.txt").toString());
+
         return user;
     }
 
@@ -64,7 +64,6 @@ public class UserService {
 		// cumulative variable
 		JSONArray resultsArray = new JSONArray();
 		// gathering the results
-		System.out.println("que pollas pasa: "+originalJson);
 		Iterator<Object> resultsIterator = originalJson.getJSONObject("sparql")
 				.getJSONObject("results").getJSONArray("result").iterator();
 		while (resultsIterator.hasNext()) {
@@ -78,9 +77,12 @@ public class UserService {
 				String key = temp.getString("name");
 				Object value = null;
 				try {
-					if (temp.names().get(1).toString().equals("literal"))
-						value = temp.getJSONObject("literal").get("content");
-					else if (temp.names().get(1).toString().equals("uri"))
+					if (temp.names().get(1).toString().equals("literal")) {
+						if (temp.getJSONObject("literal").names().length()>1)
+							value = temp.getJSONObject("literal").get("content");
+						else
+							value = "";
+					} else if (temp.names().get(1).toString().equals("uri"))
 						value = temp.getString("uri");
 					else throw new Exception ("Value not supported yet.");
 				} catch (Exception e) {

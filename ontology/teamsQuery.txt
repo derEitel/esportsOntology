@@ -1,11 +1,44 @@
-prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
-prefix esports:  <http://www.eitel-lopez.org/e-sports#>
-prefix sports:   <http://www.bbc.co.uk/ontologies/sport#>
-prefix events:   <http://motools.sourceforge.net/event/event.n3>
+prefix esports: <http://www.eitel-lopez.org/e-sports#>
+prefix foaf: <http://xmlns.com/foaf/0.1/#>
+prefix ont: <http://dbpedia.org/ontology/>
+prefix type: <http://dbpedia.org/class/yago/>
+prefix prop: <http://dbpedia.org/property/>
 
-select ?videogame ?platform where 
-{
-  ?videogame rdf:type esports:VideoGame;
-       esports:playInConsole ?platform.
+select distinct ?games ?name ?size ?won ?competitions ?abstract ?photo ?sponsors ?divisions ?location ?webs where{
+  ?c esports:isECompetitionOf ?e.
+  ?e esports:hasName ?games.
+  ?team esports:hasName ?name;
+            esports:hasUri ?teamUri.
+  {
+     select ?team (sum(?points) as ?won) where {
+        ?team esports:hasWon ?competition.
+        ?competition esports:hasPoints ?points.
+     } group by ?team
+  }
+  {
+     select ?team (count(?player) as ?size) where {
+        ?team foaf:member ?player.
+     } group by ?team
+  }
+  {
+      select ?team (group_concat(distinct ?competitionsName ; separator = ", ") AS ?competitions) where {
+         ?team esports:hasWon ?c.
+         ?c esports:hasName ?competitionsName
+      } group by ?team
+ }
+ {
+    select  ?est ?abstract ?photo (group_concat(?s ; separator = ", ") AS ?sponsors) (group_concat(?d ; separator = ", ") AS ?divisions) (group_concat(?w; separator = ", ") AS ?webs) ?location where {
+      service <http://dbpedia.org/sparql> {
+         ?est a type:ElectronicSportsTeams.
+         ?est ont:abstract ?abstract;
+                prop:hasPhotoCollection ?photo.
+         optional{?est prop:sponsors ?s}
+         optional{?est prop:divisions ?d}
+         optional{?est prop:location ?location}
+         optional{?est ont:wikiPageExternalLink ?w}
+         filter (langMatches(lang(?abstract),"en") )
+     }
+   } group by ?est
+ }
+ filter (str(?est) = str(?teamUri))
 }

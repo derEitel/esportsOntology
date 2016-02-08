@@ -2,10 +2,11 @@ prefix esports: <http://www.eitel-lopez.org/e-sports#>
 prefix foaf: <http://xmlns.com/foaf/0.1/#>
 prefix geonames: <http://www.geonames.org/ontology/ontology_v3.1.rdf#>
 
-select distinct ?name ?games ?type ?events ?winners ?cities  ?date where {
+select distinct ?name ?games ?type ?events ?winners ?cities  ?date ?abstract where {
    ?c esports:hasName ?name;
        esports:hasEvent ?e;
-       esports:hasWeb ?type.
+       esports:hasWeb ?type;
+       esports:hasDescription ?abstract.
    ?w esports:hasWon ?c;
         esports:hasName ?winners.
    ?e esports:hasDate ?date;
