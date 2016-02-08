@@ -134,6 +134,11 @@
     <rdfs:label xml:lang="fr">uri</rdfs:label>
   </owl:ObjectProperty>
   
+  <owl:ObjectProperty rdf:ID="hasDescription">
+    <rdfs:label xml:lang="en">description</rdfs:label>
+    <rdfs:label xml:lang="fr">description</rdfs:label>
+  </owl:ObjectProperty>
+  
   <owl:Class rdf:ID="Videogame">
     <rdfs:comment xml:lang="en">
       A videogame is an electronic game that involves human interaction with 
@@ -543,6 +548,14 @@
   
   <ECompetition rdf:ID="EULCSSPRING">
     <hasName>2015 NA LCS Spring Split</hasName>
+	<hasDescription>
+	  The NA Spring Finals weekend kicks off with the battle for 
+	  3rd place on Saturday, April 16. Then, we’ll switch over to 
+	  the high-stakes match of the top two teams fighting to win the 
+	  2016 NA LCS Spring Split on Sunday, April 17. The NA Spring 
+	  Finals champion will also represent North America at the 2016
+	  Mid-Season Invitational (MSI).
+	</hasDescription>
 	<isECompetitionOf rdf:resource="#eLeagueOfLegends" />
 	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">90</hasPoints>
 	<hasEvent>
@@ -563,6 +576,15 @@
 
   <ECompetition rdf:ID="EULCSSUMMER">
     <hasName>EU LCS Summer</hasName>
+	<hasDescription>
+	  The 2015 Season Championship Series is the third season of Europe's fully 
+	  professional League of Legends league. In the playoffs six teams will compete 
+	  in a single elimination bracket, with first and second place being seeded into 
+	  the semifinals. The finals and third place matches are being held in the Hovet 
+	  Arena in Stockholm, Sweden. The winner of the Summer Playoffs automatically 
+	  qualifies for the 2015 Season World Championship as the number one seed from 
+	  Europe.
+	</hasDescription>
 	<isECompetitionOf rdf:resource="#eLeagueOfLegends" />
 	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">50000</hasPoints>
 	<hasEvent>
@@ -583,6 +605,11 @@
   
   <ECompetition rdf:ID="EUNASUMMER">
     <hasName>2015 NA LCS Summer Split</hasName>
+	<hasDescription>
+	  In the event that multiple teams are tied in the standings at the conclusion 
+	  of the Summer Split, then the team that gained the most points in the Summer 
+	  Split will be considered the holder of the tiebreaker.
+	</hasDescription>
 	<isECompetitionOf rdf:resource="#eLeagueOfLegends" />
 	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</hasPoints>
 	<hasEvent>
@@ -603,6 +630,11 @@
   
   <ECompetition rdf:ID="Azubu">
     <hasName>Azubu The Champions Summer 2012</hasName>
+	<hasDescription>
+	  Azubu Blaze, formerly named MiG Blaze, is one of two squads sponsored 
+	  by German media group Azubu. They were added to Maximum impact Gaming's 
+	  roster after MiG Frost, now Azubu Frost, won the OnGameNet LoL Invitational.
+	</hasDescription>
 	<isECompetitionOf rdf:resource="#eLeagueOfLegends" />
 	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">10000</hasPoints>
 	<hasEvent>
@@ -623,6 +655,10 @@
   
   <ECompetition rdf:ID="EULCSSpringPromo">
     <hasName>2016 EU LCS Spring Promo</hasName>
+	<hasDescription>
+	  2 Challenger Teams are matched up with 8th and 9th place 
+	  LCS teams, and the winners make it to Summer Split
+	</hasDescription>
 	<isECompetitionOf rdf:resource="#eLeagueOfLegends" />
 	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">50000</hasPoints>
 	<hasEvent>
@@ -641,6 +677,12 @@
   
   <ECompetition rdf:ID="IEMSeasonIX">
     <hasName>IEM Season IX</hasName>
+	<hasDescription>
+	  The Intel Extreme Masters is ESL's flagship competition sponsored by Intel. 
+	  IEM is a huge tournament spanning many months and individual competitions culminating in the 
+	  Global Championships. While each year the games played changes, for Season IX, Starcraft 
+	  2 will be played alongside League of Legends.
+	</hasDescription>
 	<isECompetitionOf rdf:resource="#eLeagueOfLegends" />
 	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">100000</hasPoints>
 	<hasEvent>

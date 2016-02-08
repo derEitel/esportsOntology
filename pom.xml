@@ -67,6 +67,13 @@
 			<artifactId>gson</artifactId>
 			<version>2.5</version>
 		</dependency>
+		
+		<!-- flickr images -->
+		<dependency>
+		  <groupId>com.flickr4java</groupId>
+		  <artifactId>flickr4java</artifactId>
+		  <version>2.15</version>
+		</dependency>
 	</dependencies>
 
 	<build>

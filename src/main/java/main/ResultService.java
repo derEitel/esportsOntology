@@ -24,7 +24,7 @@ public class ResultService {
         Result user = new Result();
         user.setCompetitions(queryJSON("competitionsQuery.txt").toString());
         user.setTeams(queryJSON("teamsQuery.txt").toString());
-        
+
         return user;
     }
 
@@ -77,9 +77,12 @@ public class ResultService {
 				String key = temp.getString("name");
 				Object value = null;
 				try {
-					if (temp.names().get(1).toString().equals("literal"))
-						value = temp.getJSONObject("literal").get("content");
-					else if (temp.names().get(1).toString().equals("uri"))
+					if (temp.names().get(1).toString().equals("literal")) {
+						if (temp.getJSONObject("literal").names().length()>1)
+							value = temp.getJSONObject("literal").get("content");
+						else
+							value = "";
+					} else if (temp.names().get(1).toString().equals("uri"))
 						value = temp.getString("uri");
 					else throw new Exception ("Value not supported yet.");
 				} catch (Exception e) {
