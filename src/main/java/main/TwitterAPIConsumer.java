@@ -32,13 +32,14 @@ public class TwitterAPIConsumer {
             QueryResult result;
             query.count(10);
             
-            
             result = twitter.search(query);
             List<Status> tweets = result.getTweets();
             // Print the Tweets
+            /*
             for (Status tweet : tweets) {
                 System.out.println(tweet.getCreatedAt() +  " @" + tweet.getUser().getScreenName() + " - " + tweet.getText());
             }
+            */
             return tweets;
         } catch (TwitterException te) {
             te.printStackTrace();
