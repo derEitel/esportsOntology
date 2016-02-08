@@ -1,9 +1,10 @@
 {
  "name": "eSports Ontology",
  "children": [
-  { "name": "Sports", "size": 200 },
+  { "name": "BBC Sports", "size": 200 },
   { "name": "Events", "size": 400 },
   { "name": "FOAF", "size": 600 },
-  { "name": "dc", "size": 800 }
+  { "name": "dc", "size": 800 },
+  { "name": "DBpedia", "size": 800 }
  ]
 }

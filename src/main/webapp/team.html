@@ -44,12 +44,19 @@
           Location: <br>
           Number of Players: <br>
           Website: <br>
+          Points: <br>
+          Games: <br>
+          Players: <br>
         </div>
         <div class="col-md-2" id="team_basics">
           <br>
           <div align="right" id="team_location">Europe</div>
           <div align="right" id="team_num">7</div>
-          <div align="right" id="team_website"><a href="http://www.fnatic.com/">www.fnatic.com</a></div> <br>
+          <div align="right" id="team_website"><a href="http://www.fnatic.com/">www.fnatic.com</a></div> 
+          <div align="right" id="team_points">12</div>
+          <div align="right" id="team_games">lol</div>
+          <div align="right" id="team_players">names</div>
+          <br>
         </div>
 <!-- 
         <div class="col-md-8" id="team_players">
@@ -160,10 +167,13 @@
       $.getJSON( "rest/team/" + getQueryVariable("query"), function( data ) {
     	  document.getElementById("team_location").innerHTML = data.location;
     	  document.getElementById("team_num").innerHTML = data.size;
-    	  document.getElementById("team_website").innerHTML = '<a href="' + data.website + '"> ' + data.website + ' </a>';
+    	  document.getElementById("team_website").innerHTML = '<a href="' + data.webs + '"> ' + data.webs + ' </a>';
     	  document.getElementById("team_desc").innerHTML = data.abstract;
     	  document.getElementById("team_logo").src = data.photo;
     	  document.getElementById("team_name").innerHTML = data.name;
+    	  document.getElementById("team_points").innerHTML = data.won;
+    	  document.getElementById("team_games").innerHTML = data.divisions;
+    	  document.getElementById("team_players").innerHTML = data.players;
       });
       
       //fill timeline with tweets
