@@ -21,6 +21,24 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- Corese: ontology engine -->
+		<dependency>
+		    <groupId>inria</groupId>
+		    <artifactId>fr.inria</artifactId>
+		    <version>1.0</version>
+		    <scope>system</scope>
+		    <systemPath>${project.basedir}/libs/corese-3.1.7.jar</systemPath>
+		</dependency>
+        
+        <!-- Jackson: json processor -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20151123</version>
+		</dependency>
+
+		
+		
 		<!-- RESTful web service: Jersey -->
 		<dependency>
 			<groupId>com.sun.jersey</groupId>

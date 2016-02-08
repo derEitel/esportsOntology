@@ -1,9 +1,0 @@
-{
- "name": "eSports Ontology",
- "children": [
-  { "name": "Sports", "size": 200 },
-  { "name": "Events", "size": 400 },
-  { "name": "FOAF", "size": 600 },
-  { "name": "dc", "size": 800 }
- ]
-}

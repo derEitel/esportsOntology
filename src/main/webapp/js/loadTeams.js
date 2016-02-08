@@ -5,38 +5,42 @@ function loadTeam(table, json) {
         "ajax": {
             "url" : json,
             "dataSrc": function ( json ) {
+            	json = json.lastName;
+            	
+            	json = JSON.parse(json);
+       
       for ( var i=0, ien=json.data.length ; i<ien ; i++ ) {
           
     	  // Insert link for team
     	  json.data[i].name = '<a href="/team.html?query='+json.data[i].name+'">'+json.data[i].name+'</a>';
     	  
           // Parse games (multivalues) into string
-          if(typeof(json.data[i].games) == "undefined"){
-              json.data[i].games = "None";
-          }
-          else{
-              var games = json.data[i].games[0].name;
-              if(json.data[i].games.length > 1){
-                for (var j = 1; j < json.data[i].games.length; j++){
-                  games = games + ", " +  json.data[i].games[j].name;
-                }
-              }
-              json.data[i].games = games;
-          }
+//          if(typeof(json.data[i].games) == "undefined"){
+//              json.data[i].games = "None";
+//          }
+//          else{
+//              var games = json.data[i].games[0].name;
+//              if(json.data[i].games.length > 1){
+//                for (var j = 1; j < json.data[i].games.length; j++){
+//                  games = games + ", " +  json.data[i].games[j].name;
+//                }
+//              }
+//              json.data[i].games = games;
+//          }
           
           // Parse competitions (multivalues) into string
-          if(typeof(json.data[i].competitions) == "undefined"){
-              json.data[i].competitions = "None";
-          }
-          else{
-              var comps = '<a href="/competition.html?query='+json.data[i].competitions[0].name+'">'+json.data[i].competitions[0].name+'</a>';
-              if(json.data[i].competitions.length > 1){
-                for (var j = 1; j < json.data[i].competitions.length; j++){
-                  comps = comps + ", " +  '<a href="/competition.html?query='+json.data[i].competitions[j].name+'">'+json.data[i].competitions[j].name+'</a>';
-                }
-              }
-              json.data[i].competitions = comps;
-          }
+//          if(typeof(json.data[i].competitions) == "undefined"){
+//              json.data[i].competitions = "None";
+//          }
+//          else{
+//              var comps = '<a href="/competition.html?query='+json.data[i].competitions[0].name+'">'+json.data[i].competitions[0].name+'</a>';
+//              if(json.data[i].competitions.length > 1){
+//                for (var j = 1; j < json.data[i].competitions.length; j++){
+//                  comps = comps + ", " +  '<a href="/competition.html?query='+json.data[i].competitions[j].name+'">'+json.data[i].competitions[j].name+'</a>';
+//                }
+//              }
+//              json.data[i].competitions = comps;
+//          }
       }
       return json.data;
     }

@@ -1,0 +1,25 @@
+prefix esports: <http://www.eitel-lopez.org/e-sports#>
+prefix foaf: <http://xmlns.com/foaf/0.1/#>
+
+select distinct ?games ?name ?size ?won ?competitions  where{
+  ?c esports:isECompetitionOf ?e.
+  ?e esports:hasName ?games.
+  ?team esports:hasName ?name.
+  {
+     select ?team (sum(?points) as ?won) where {
+        ?team esports:hasWon ?competition.
+        ?competition esports:hasPoints ?points.
+     } group by ?team
+  }
+  {
+     select ?team (count(?player) as ?size) where {
+        ?team foaf:member ?player.
+     } group by ?team
+  }
+  {
+      select ?team (group_concat(distinct ?competitionsName ; separator = ", ") AS ?competitions) where {
+         ?team esports:hasWon ?c.
+         ?c esports:hasName ?competitionsName
+      } group by ?team
+  }
+}

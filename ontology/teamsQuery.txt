@@ -1,0 +1,11 @@
+prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+prefix esports:  <http://www.eitel-lopez.org/e-sports#>
+prefix sports:   <http://www.bbc.co.uk/ontologies/sport#>
+prefix events:   <http://motools.sourceforge.net/event/event.n3>
+
+select ?videogame ?platform where 
+{
+  ?videogame rdf:type esports:VideoGame;
+       esports:playInConsole ?platform.
+}

@@ -1,0 +1,905 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [
+     <!ENTITY sports   "http://www.bbc.co.uk/ontologies/sport/3.2.ttl" >
+     <!ENTITY events   "http://motools.sourceforge.net/event/event.n3" >
+	 <!ENTITY dc	   "http://purl.org/dc/elements/1.1/#" >
+	 <!ENTITY foaf     "http://xmlns.com/foaf/0.1/#" >
+	 <!ENTITY e-sports "http://www.eitel-lopez.org/e-sports#" >
+	 <!ENTITY e-games  "http://www.eitel-lopez.org/e-games#" >
+	 <!ENTITY e-teams  "http://www.eitel-lopez.org/e-teams#" >
+	 <!ENTITY dbpedia  "http://dbpedia.org/resource/" >
+     <!ENTITY owl      "http://www.w3.org/2002/07/owl#" >
+     <!ENTITY xsd      "http://www.w3.org/2001/XMLSchema#" >
+   ]>
+
+<rdf:RDF
+  xmlns              = "http://www.eitel-lopez.org/e-sports#"
+  xmlns:e-sports     = "http://www.eitel-lopez.org/e-sports#"
+  xml:base           = "http://www.eitel-lopez.org/e-sports#"
+  xmlns:sports       = "http://www.bbc.co.uk/ontologies/sport/3.2.ttl"
+  xmlns:events       = "http://motools.sourceforge.net/event/event.n3"
+  xmlns:dc           = "http://purl.org/dc/elements/1.1/#"
+  xmlns:foaf		 = "http://xmlns.com/foaf/0.1/#"
+  xmlns:e-games		 = "http://www.eitel-lopez.org/e-games#"
+  xmlns:e-teams  	 = "http://www.eitel-lopez.org/e-teams#"
+  xmlns:geonames	 = "http://www.geonames.org/ontology/ontology_v3.1.rdf#"
+  xmlns:dbpedia		 = "http://dbpedia.org/resource/"
+  xmlns:owl          = "http://www.w3.org/2002/07/owl#"
+  xmlns:rdf          = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs         = "http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:xsd          = "http://www.w3.org/2001/XMLSchema#">
+  
+  <owl:Ontology rdf:about="">9
+    <rdfs:comment xml:lang="en">We present here an example of OWL ontology</rdfs:comment>
+    <owl:imports rdf:resource="http://www.bbc.co.uk/ontologies/sport/3.2.ttl"/>
+    <owl:imports rdf:resource="http://purl.org/dc/elements/1.1/#"/>
+	<owl:imports rdf:resource="http://xmlns.com/foaf/0.1/#" />
+	<owl:imports rdf:resource="http://motools.sourceforge.net/event/event.n3"/>
+	<owl:imports rdf:resource="http://www.geonames.org/ontology/ontology_v3.1.rdf" />
+    <rdfs:label>ESports Ontology</rdfs:label>
+    <owl:versionInfo rdf:datatype="&xsd;float">1.00</owl:versionInfo>
+  </owl:Ontology>
+  
+  <owl:Class rdf:ID="Organization">
+    <rdfs:comment xml:lang="en">
+      Entity responsible of the management and regualation of any event
+    </rdfs:comment>
+    <rdfs:label xml:lang="en">organization</rdfs:label>
+    <rdfs:label xml:lang="fr">organization</rdfs:label>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="EOrganization">
+    <rdfs:comment xml:lang="en">
+      Management unit responsible the organization of any sports event
+    </rdfs:comment>
+    <rdfs:label xml:lang="en">e-sports organization</rdfs:label>
+    <rdfs:label xml:lang="fr">organization d'e-sports</rdfs:label>
+  </owl:Class>
+  
+  <owl:ObjectProperty rdf:about="isOrganizationOf">
+    <rdfs:comment xml:lang="en">
+      This property relates the Organizer unit with the Event, ESport, ...
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#hasOrganization" /> 
+    <rdfs:domain rdf:resource="#Organization" />
+    <rdfs:label xml:lang="en">isOrganizationOf</rdfs:label>
+    <rdfs:label xml:lang="fr">organizationDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="hasOrganization">
+    <rdfs:comment xml:lang="en">
+      This property relates an Organization with its ESports, ECompetitions, Events, ...
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#isOrganizationOf" /> 
+    <rdfs:range rdf:resource="#Organization" />
+    <rdfs:label xml:lang="en">hasOrganization</rdfs:label>
+    <rdfs:label xml:lang="fr">organizationDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:Class rdf:ID="Hobby">
+    <rdfs:comment xml:lang="en">
+      Game, pastime or activity
+    </rdfs:comment> 
+    <rdfs:label xml:lang="en">hobby</rdfs:label>
+    <rdfs:label xml:lang="fr">hobby</rdfs:label>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="ESport">
+    <rdfs:comment xml:lang="en">
+      eSports (also known as electronic sports, esports, e-sports, 
+      competitive (video) gaming, professional (video) gaming, or 
+  	  pro-gaming) can be defined as a form of sports where the primary 
+  	  aspects of the sport are facilitated by video games
+    </rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#Hobby" />
+    <rdfs:seeAlso>
+      <rdf:Description rdf:about="https://en.wikipedia.org/wiki/ESports">
+       <dc:format>text</dc:format>
+      </rdf:Description>
+    </rdfs:seeAlso>
+    <rdfs:label xml:lang="en">e-sport</rdfs:label>
+    <rdfs:label xml:lang="fr">e-sport</rdfs:label>
+  </owl:Class>
+  
+  <owl:ObjectProperty rdf:ID="derivedFrom">
+    <rdf:type rdf:resource="&owl;FunctionalProperty" />
+    <rdfs:domain rdf:resource="ESports" />
+    <rdfs:range rdf:resource="VideoGame" />
+	<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+    <rdfs:label xml:lang="en">derived from</rdfs:label>
+    <rdfs:label xml:lang="fr">viens de</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="similarESport">
+    <rdfs:comment xml:lang="en">
+      Builds a relationship of similarity among the sports
+    </rdfs:comment>
+    <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+    <rdfs:label xml:lang="en">similar ESport</rdfs:label>
+    <rdfs:label xml:lang="fr">similar ESport</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:ID="hasName">
+    <rdfs:label xml:lang="en">name</rdfs:label>
+    <rdfs:label xml:lang="fr">nom</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:Class rdf:ID="Videogame">
+    <rdfs:comment xml:lang="en">
+      A videogame is an electronic game that involves human interaction with 
+  	a user interface to generate visual feedback on a video device such as 
+  	a TV screen or computer monitor
+    </rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#Hobby" />
+    <rdfs:seeAlso>
+      <rdf:Description rdf:about="https://en.wikipedia.org/wiki/Video_game">
+       <dc:format>text</dc:format>
+      </rdf:Description>
+    </rdfs:seeAlso>
+    <rdfs:label xml:lang="en">videogame</rdfs:label>
+    <rdfs:label xml:lang="fr">jéu vidéo</rdfs:label>
+  </owl:Class>
+  
+  <owl:ObjectProperty rdf:ID="basedOn">
+    <rdfs:comment xml:lang="en">
+      Relates Videogames and ESports
+    </rdfs:comment>
+    <rdf:type rdf:resource="&owl;FunctionalProperty" />
+    <rdfs:domain rdf:resource="Videogame" />
+    <rdfs:range rdf:resource="ESports" />
+    <rdfs:label xml:lang="en">based on</rdfs:label>
+    <rdfs:label xml:lang="fr">basé sur</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:Class rdf:ID="VideoConsole">
+    <rdfs:comment xml:lang="en">
+      A video game console is a device that outputs a video signal or visual 
+  	image to display a video game
+    </rdfs:comment>
+    <rdfs:seeAlso>
+      <rdf:Description rdf:about="https://en.wikipedia.org/wiki/Video_game_console">
+       <dc:format>text</dc:format>
+      </rdf:Description>
+    </rdfs:seeAlso>
+    <rdfs:label xml:lang="en">video console station</rdfs:label>
+    <rdfs:label xml:lang="fr">console de jéu vidéo</rdfs:label>
+  </owl:Class>
+  
+  <owl:ObjectProperty rdf:ID="hasWon">
+    <rdfs:comment xml:lang="en">
+      Property that gathers victories
+    </rdfs:comment>
+    <rdfs:label xml:lang="en">has won</rdfs:label>
+    <rdfs:label xml:lang="fr">reussir</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:ID="playInConsole">
+    <rdfs:comment xml:lang="en">
+      Describes the platform in which the game is played
+    </rdfs:comment>
+    <rdf:type rdf:resource="&owl;FunctionalProperty" />
+    <rdfs:domain rdf:resource="Videogame" />
+    <rdfs:range rdf:resource="VideoConsole" />
+    <rdfs:label xml:lang="en">play in console</rdfs:label>
+    <rdfs:label xml:lang="fr">basé sur</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:Class rdf:about="Event">
+    <rdfs:subClassOf rdf:resource="&events;Event"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="&events;Place" />
+        <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <owl:ObjectProperty rdf:about="isEventOf">
+    <rdfs:comment xml:lang="en">
+      This property relates the Events with the ECompetitions
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#hasEvent" /> 
+    <rdfs:domain rdf:resource="#Event" />
+    <rdfs:range rdf:resource="#ECompetition" />
+    <rdfs:label xml:lang="en">isEventOf</rdfs:label>
+    <rdfs:label xml:lang="fr">eventement de</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="hasEvent">
+    <rdfs:comment xml:lang="en">
+      This property relates an Event with its ECompetitions
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#isEventOf" /> 
+    <rdfs:domain rdf:resource="#ECompetition" />
+    <rdfs:range rdf:resource="#Event" />
+    <rdfs:label xml:lang="en">hasEvent</rdfs:label>
+    <rdfs:label xml:lang="fr">eventementDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="hasPoints">
+    <rdfs:comment xml:lang="en">
+      Number of points given for winning in any ESports competition
+    </rdfs:comment>
+    <rdfs:label xml:lang="en">has points</rdfs:label>
+    <rdfs:label xml:lang="fr">tiens points</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:Class rdf:about="ECompetition">
+    <rdfs:comment xml:lang="en">
+      A competition can be understood as a league of a specific game, the participants
+  	compete making point across the events to have better position in the classification.
+    </rdfs:comment>
+    <rdfs:label xml:lang="en">ECompetition</rdfs:label>
+    <rdfs:label xml:lang="fr">ECompetition</rdfs:label>
+  </owl:Class>
+  
+  <owl:ObjectProperty rdf:about="isECompetitionOf">
+    <rdfs:comment xml:lang="en">
+      This property relates the ECompetition with the ESports
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#hasECompetition" /> 
+    <rdfs:domain rdf:resource="#ECompetition" />
+    <rdfs:range rdf:resource="#ESport" />
+    <rdfs:label xml:lang="en">isECompetitionOf</rdfs:label>
+    <rdfs:label xml:lang="fr">ecompetitionDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="hasECompetition">
+    <rdfs:comment xml:lang="en">
+      This property relates an ESport with its ECompetitions
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#isECompetitionOf" /> 
+    <rdfs:domain rdf:resource="#ESport" />
+    <rdfs:range rdf:resource="#ECompetition" />
+    <rdfs:label xml:lang="en">hasECompetition</rdfs:label>
+    <rdfs:label xml:lang="fr">competitionDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:Class rdf:about="EDivision">
+    <rdfs:comment xml:lang="en">
+      In the ESports as in any other competion there are different proffesional levels
+    </rdfs:comment>
+    <rdfs:label xml:lang="en">E-Division</rdfs:label>
+    <rdfs:label xml:lang="fr">E-Division</rdfs:label>
+  </owl:Class>
+  
+  <owl:ObjectProperty rdf:about="isEDivisionOf">
+    <rdfs:comment xml:lang="en">
+      This property relates an E-division with Events, ECompetitions or ESports
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#hasECompetition" /> 
+    <rdfs:domain rdf:resource="#EDivision" />
+    <rdfs:label xml:lang="en">isECompetitionOf</rdfs:label>
+    <rdfs:label xml:lang="fr">divisionDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="hasEDivision">
+    <rdfs:comment xml:lang="en">
+      This property relates Events, ECompetitions or ESports with their EDivisions
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#isEDivisionOf" /> 
+    <rdfs:range rdf:resource="#EDivision" />
+    <rdfs:label xml:lang="en">hasEDivision</rdfs:label>
+    <rdfs:label xml:lang="fr">divisionDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:Class rdf:about="ESession">
+    <rdfs:comment xml:lang="en">
+      An ESession is a set of events
+    </rdfs:comment>
+    <rdfs:label xml:lang="en">ESession</rdfs:label>
+    <rdfs:label xml:lang="fr">ESession</rdfs:label>
+  </owl:Class>
+  
+  <owl:ObjectProperty rdf:about="isESessionOf">
+    <rdfs:comment xml:lang="en">
+      This property relates an ESession with an ECompetition
+  	ESports have the particularity that the events in different places might be related to the same session of the League.
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#hasESession" /> 
+    <rdfs:domain rdf:resource="#ESession" />
+    <rdfs:range rdf:resource="#ECompetition" />
+    <rdfs:label xml:lang="en">isECompetitionOf</rdfs:label>
+    <rdfs:label xml:lang="fr">divisionDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="hasESession">
+    <rdfs:comment xml:lang="en">
+      This property relates an ECompetition with an ESession
+  	ESports have the particularity that the events in different places might be related to the same session of the League.
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#isEDivisionOf" /> 
+    <rdfs:domain rdf:resource="#ECompetition" />
+    <rdfs:range rdf:resource="#ESession" />
+    <rdfs:label xml:lang="en">hasESession</rdfs:label>
+    <rdfs:label xml:lang="fr">sessionDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:Class rdf:about="EStage">
+    <rdfs:comment xml:lang="en">
+      Within a session there might be different rounds (i.e. a round of 16, a round of 8, quarter finals, semifinals, finals)
+    </rdfs:comment>
+    <owl:sameAs rdf:resource="#ERound" />
+    <rdfs:label xml:lang="en">EStage</rdfs:label>
+    <rdfs:label xml:lang="fr">EStage</rdfs:label>
+  </owl:Class>
+  
+  <owl:Class rdf:about="ERound">
+    <rdfs:comment xml:lang="en">
+      Within a session there might be different stages (i.e. a stage of 16, a stage of 8, quarter finals, semifinals, finals)
+    </rdfs:comment>
+    <owl:sameAs rdf:resource="#EStage" />
+    <rdfs:label xml:lang="en">ERound</rdfs:label>
+    <rdfs:label xml:lang="fr">ERound</rdfs:label>
+  </owl:Class>
+  
+  <owl:ObjectProperty rdf:about="isERoundOf">
+    <rdfs:comment xml:lang="en">
+      This property relates an ERound with an ESession
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#hasERound" /> 
+    <rdfs:domain rdf:resource="#ERound" />
+    <rdfs:range rdf:resource="#ESession" />
+    <rdfs:label xml:lang="en">isERoundOf</rdfs:label>
+    <rdfs:label xml:lang="fr">tournéeDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="hasERound">
+    <rdfs:comment xml:lang="en">
+      This property relates an ESession with an ESRound
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#isERoundOf" /> 
+    <rdfs:domain rdf:resource="#ESession" />
+    <rdfs:range rdf:resource="#ERound" />
+    <rdfs:label xml:lang="en">hasERound</rdfs:label>
+    <rdfs:label xml:lang="fr">tournéeDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:Class rdf:about="EGroupCompetition">
+    <rdfs:comment xml:lang="en">
+      When there's a large number of teams, these are splitted into groups within the rounds. 
+  	For instance the round of 16 can have A - F group competions to hold and to arrange all the
+  	participant teams
+    </rdfs:comment>
+    <rdfs:label xml:lang="en">EGroupCompetition</rdfs:label>
+    <rdfs:label xml:lang="fr">EGroupCompetition</rdfs:label>
+  </owl:Class>
+  
+  <owl:ObjectProperty rdf:about="isEGroupCompetitionOf">
+    <rdfs:comment xml:lang="en">
+      This property relates an EGroupCompetition with an ERound
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#hasEGroupCompetition" /> 
+    <rdfs:domain rdf:resource="#EGroupCompetition" />
+    <rdfs:range rdf:resource="#ERound" />
+    <rdfs:label xml:lang="en">isEGroupCompetitionOf</rdfs:label>
+    <rdfs:label xml:lang="fr">groupeDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="hasEGroupCompetition">
+    <rdfs:comment xml:lang="en">
+      This property relates an ERound with an EGroupCompetition
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#isEGroupCompetitionOf" /> 
+    <rdfs:domain rdf:resource="#ERound" />
+    <rdfs:range rdf:resource="#EGroupCompetition" />
+    <rdfs:label xml:lang="en">hasEGroupCompetition</rdfs:label>
+    <rdfs:label xml:lang="fr">groupeDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:Class rdf:about="EMatch">
+    <rdfs:comment xml:lang="en">
+      A match is a game between different teams or individual players
+    </rdfs:comment>
+    <rdfs:label xml:lang="en">EMatch</rdfs:label>
+    <rdfs:label xml:lang="fr">EMatch</rdfs:label>
+  </owl:Class>
+  
+  <owl:ObjectProperty rdf:about="isEMatchOf">
+    <rdfs:comment xml:lang="en">
+      This property relates an EMatch with an EGroupCompetition, an Event or an ERound
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#hasEMatch" /> 
+    <rdfs:domain rdf:resource="#EMatch" />
+    <rdfs:label xml:lang="en">isEMatch</rdfs:label>
+    <rdfs:label xml:lang="fr">matchDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="hasEMatch">
+    <rdfs:comment xml:lang="en">
+      This property relates an EGroupCompetition, an Event or an ERound with an EMatch
+    </rdfs:comment>
+    <owl:inverseOf rdf:resource="#isEMatchOf" /> 
+    <rdfs:range rdf:resource="#EMatch" />
+    <rdfs:label xml:lang="en">hasEMatch</rdfs:label>
+    <rdfs:label xml:lang="fr">matchDe</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="previousECompetition">
+    <rdfs:comment xml:lang="en">
+      Sets the previous Event, ECompetition, EMatch, ...
+    </rdfs:comment>
+    <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+    <owl:inverseOf rdf:resource="#nextECompetition" />
+    <rdfs:label xml:lang="en">previous competition</rdfs:label>
+    <rdfs:label xml:lang="fr">anterieur competition</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="nextECompetition">
+    <rdfs:comment xml:lang="en">
+      Sets the previous Event, ECompetition, EMatch, ...
+    </rdfs:comment>
+    <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+    <owl:inverseOf rdf:resource="#previousECompetition" />
+    <rdfs:label xml:lang="en">next e-competition</rdfs:label>
+    <rdfs:label xml:lang="fr">suivant e-competition</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="multigameConsistsOf">
+    <rdfs:comment xml:lang="en">
+      Some of the ECompetition (Events, EMatches, ERounds, ...) may consists of different ESports (multigame)
+    </rdfs:comment>
+    <rdfs:range rdf:resource="#ESport" />
+    <rdfs:label xml:lang="en">multigame ECompetition consists of</rdfs:label>
+    <rdfs:label xml:lang="fr">competetion multijéu basé sur</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="hasDate">
+    <rdfs:comment xml:lang="en">
+      This property sets the date of any variety of sports event
+    </rdfs:comment>
+    <rdfs:range rdf:resource="&dc;date" />
+    <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+  </owl:ObjectProperty>
+  
+  <owl:Class rdf:about="EPlayer">
+    <rdfs:comment xml:lang="en">
+      A player is a person who play ESports individually or within a team
+    </rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&foaf;Person" />
+    <rdfs:label xml:lang="en">person</rdfs:label>
+    <rdfs:label xml:lang="fr">personne</rdfs:label>
+  </owl:Class>
+  
+  <owl:Class rdf:about="ETeam">
+    <rdfs:comment xml:lang="en">
+      Group of players which competes in ESports
+    </rdfs:comment>
+	<rdfs:subClassOf rdf:resource="&foaf;Group" />
+    <rdfs:label xml:lang="en">team</rdfs:label>
+    <rdfs:label xml:lang="fr">équipe</rdfs:label>
+  </owl:Class>
+  
+  <!-- RDF DATA !-->
+  
+  <owl:AllDifferent>
+    <owl:distinctMembers rdf:parseType="Collection">
+      <VideoConsole rdf:about="#PS1" />
+      <VideoConsole rdf:about="#PS2" />
+	  <VideoConsole rdf:about="#PS3" />
+	  <VideoConsole rdf:about="#PS4" />
+	  <VideoConsole rdf:about="#XBox" />
+	  <VideoConsole rdf:about="#PC" />
+    </owl:distinctMembers>
+  </owl:AllDifferent>
+  
+  <VideoGame rdf:ID="LeagueOfLegends">
+	 <playInConsole rdf:resource="#PC" />
+  </VideoGame>
+  
+  <VideoGame rdf:ID="FIFA">
+	 <basedOn rdf:resource="#Football" />
+	 <playInConsole rdf:resource="#PS2" />
+	 <playInConsole rdf:resource="#PS3" />
+	 <playInConsole rdf:resource="#PS4" />
+	 <playInConsole rdf:resource="#XBox" />
+	 <playInConsole rdf:resource="#PC" />
+  </VideoGame>
+  
+  <VideoGame rdf:ID="PRO">
+	 <basedOn rdf:resource="#Football" />
+	 <playInConsole rdf:resource="#PS4" />
+	 <playInConsole rdf:resource="#PC" />
+  </VideoGame>
+  
+  <VideoGame rdf:ID="F1">
+	 <basedOn rdf:resource="#Football" />
+	 <playInConsole rdf:resource="#PS4" />
+	 <playInConsole rdf:resource="#PC" />
+  </VideoGame>
+  
+  <owl:AllDifferent>
+    <owl:distinctMembers rdf:parseType="Collection">
+      <sports:Sport rdf:about="#Football" />
+      <sports:Sport rdf:about="#Chess" />
+	  <sports:Sport rdf:about="#Racing" />
+	  <sports:Sport rdf:about="#Fight" />
+    </owl:distinctMembers>
+  </owl:AllDifferent>
+  
+  <owl:AllDifferent>
+    <owl:distinctMembers rdf:parseType="Collection">
+      <ERound rdf:about="#QuarterFinals">
+	    <hasName>Quarter Finals</hasName>
+	  </ERound>
+	  <ERound rdf:about="#SemiFinals">
+	    <hasName>Semi Finals</hasName>
+	  </ERound>
+	  <ERound rdf:about="#Final" >
+	    <hasName>Final</hasName>
+	  </ERound>
+    </owl:distinctMembers>
+  </owl:AllDifferent>
+  
+  <ECompetition rdf:ID="EULCSSPRING">
+    <hasName>2015 NA LCS Spring Split</hasName>
+	<isECompetitionOf rdf:resource="#eLeagueOfLegends" />
+	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">90</hasPoints>
+	<hasEvent>
+	  <Event rdf:ID="EULCSSPRINGPlayoffs">
+	    <hasDate>
+	      <dc:date>2015-03-30</dc:date>
+	    </hasDate>
+	    <geonames:locatedIn>
+	      <geonames:Feature>
+	        <geonames:name>Europe</geonames:name>
+	      </geonames:Feature>
+	    </geonames:locatedIn>
+	  </Event>
+	</hasEvent>
+	<foaf:homepage>
+      <foaf:document rdf:ID="http://euw.lolesports.com/" />
+	</foaf:homepage>
+	<hasERound rdf:resource="#QuarterFinals" />
+	<hasERound rdf:resource="#SemiFinals" />
+	<hasERound rdf:resource="#Final" />
+  </ECompetition>
+
+  <ECompetition rdf:ID="EULCSSUMMER">
+    <hasName>EU LCS Summer</hasName>
+	<isECompetitionOf rdf:resource="#eLeagueOfLegends" />
+	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">50000</hasPoints>
+	<hasEvent>
+	  <Event rdf:ID="EULCSSUMMERPlayoffs">
+	    <hasDate>
+	      <dc:date>2015-05-28</dc:date>
+	    </hasDate>
+	    <geonames:locatedIn>
+	      <geonames:Feature>
+	        <geonames:name>Europe</geonames:name>
+	      </geonames:Feature>
+	    </geonames:locatedIn>
+	  </Event>
+	</hasEvent>
+	<foaf:homepage>
+      <foaf:document rdf:ID="http://euw.lolesports.com/" />
+	</foaf:homepage>
+	<hasERound rdf:resource="#QuarterFinals" />
+	<hasERound rdf:resource="#SemiFinals" />
+	<hasERound rdf:resource="#Final" />
+  </ECompetition>
+  
+  <ECompetition rdf:ID="EUNASUMMER">
+    <hasName>2015 NA LCS Summer Split</hasName>
+	<isECompetitionOf rdf:resource="#eLeagueOfLegends" />
+	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</hasPoints>
+	<hasEvent>
+	  <Event rdf:ID="EUNASUMMERPlayoffs">
+	    <hasDate>
+	      <dc:date>2015-05-30</dc:date>
+	    </hasDate>
+	    <geonames:locatedIn>
+	      <geonames:Feature>
+	        <geonames:name>USA</geonames:name>
+	      </geonames:Feature>
+	    </geonames:locatedIn>
+	  </Event>
+	</hasEvent>
+	<foaf:homepage>
+      <foaf:document rdf:ID="http://na.lolesports.com/" />
+	</foaf:homepage>
+	<hasERound rdf:resource="#QuarterFinals" />
+	<hasERound rdf:resource="#SemiFinals" />
+	<hasERound rdf:resource="#Final" />
+  </ECompetition>
+  
+  <ECompetition rdf:ID="Azubu">
+    <hasName>Azubu The Champions Summer 2012</hasName>
+	<isECompetitionOf rdf:resource="#eLeagueOfLegends" />
+	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">10000</hasPoints>
+	<hasEvent>
+	  <Event rdf:ID="Azubu">
+	    <hasDate>
+	      <dc:date>2012-07-04</dc:date>
+	    </hasDate>
+	    <geonames:locatedIn>
+	      <geonames:Feature>
+	        <geonames:name>South Corea</geonames:name>
+	      </geonames:Feature>
+	    </geonames:locatedIn>
+	  </Event>
+	</hasEvent>
+	<foaf:homepage>
+      <foaf:document rdf:ID="http://www.ognlol.com/" />
+	</foaf:homepage>
+	<hasERound rdf:resource="#QuarterFinals" />
+	<hasERound rdf:resource="#SemiFinals" />
+	<hasERound rdf:resource="#Final" />
+  </ECompetition>
+  
+  <ECompetition rdf:ID="EULCSSpringPromo">
+    <hasName>2016 EU LCS Spring Promo</hasName>
+	<isECompetitionOf rdf:resource="#eLeagueOfLegends" />
+	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">50000</hasPoints>
+	<hasEvent>
+	  <Event rdf:ID="EULCSSpringPromo">
+	    <hasDate>
+	      <dc:date>2016</dc:date>
+	    </hasDate>
+	    <geonames:locatedIn>
+	      <geonames:Feature>
+	        <geonames:name>Europe</geonames:name>
+	      </geonames:Feature>
+	    </geonames:locatedIn>
+	  </Event>
+	</hasEvent>
+	<foaf:homepage>
+      <foaf:document rdf:ID="http://www.riotgames.com/" />
+	</foaf:homepage>
+	<hasERound rdf:resource="#Final" />
+  </ECompetition>
+  
+  <ECompetition rdf:ID="IEMSeasonIX">
+    <hasName>IEM Season IX</hasName>
+	<isECompetitionOf rdf:resource="#eLeagueOfLegends" />
+	<hasPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">100000</hasPoints>
+	<hasEvent>
+	  <Event rdf:ID="IEMSeasonIX">
+	    <hasDate>
+	      <dc:date>2015-03-12</dc:date>
+	    </hasDate>
+	    <geonames:locatedIn>
+	      <geonames:Feature>
+	        <geonames:name>Europe</geonames:name>
+	      </geonames:Feature>
+	    </geonames:locatedIn>
+	  </Event>
+	</hasEvent>
+	<foaf:homepage>
+      <foaf:document rdf:ID="http://intelextrememasters.com/" />
+	</foaf:homepage>
+	<hasERound rdf:resource="#Final" />
+  </ECompetition>
+  
+  <ESport rdf:ID="eLeagueOfLegends">
+    <hasName>League Of Legends</hasName>
+    <derivedFrom rdf:resource="#LeagueOfLegends" />
+	<hasCompetition rdf:resource="#WorldChampionship" />
+    <hasCompetition rdf:resource="#WorldChampionship" />
+	<hasCompetition rdf:resource="#EuropeanChampionship" />
+	<hasCompetition rdf:resource="#FrenchChampionship" />
+  </ESport>
+  
+  <ESport rdf:ID="eFIFA">
+    <hasName>FIFA</hasName>
+    <derivedFrom rdf:resource="#FIFA" />
+    <hasCompetition rdf:resource="#WorldChampionship" />
+  </ESport>
+  
+  <ESport rdf:ID="ePRO">
+    <hasName>PRO</hasName>
+	<derivedFrom rdf:resource="#PRO" />
+	<hasCompetition rdf:resource="#WorldChampionship" />
+	<hasCompetition rdf:resource="#EuropeanChampionship" />
+	<hasCompetition rdf:resource="#FrenchChampionship" />
+  </ESport>
+  
+  <ESport rdf:ID="eF1">
+    <hasName>F1</hasName>
+	<derivedFrom rdf:resource="#F1" />
+	<hasCompetition rdf:resource="#WorldChampionship" />
+  </ESport>
+  
+  <ETeam rdf:ID="&dbpedia;Fnatic">
+	<hasName>Fnatic</hasName>
+	<foaf:homepage>
+	  <foaf:document rdf:ID="http://www.fnatic.com" />
+	</foaf:homepage>
+	<playInConsole rdf:resource="#PS2" />
+	<hasWon rdf:resource="#EULCSSPRING" />
+	<hasWon rdf:resource="#EULCSSUMMER" />
+	<foaf:member>
+	  <EPlayer rdf:ID="Gamsu">
+  	    <foaf:geekcode>Gamsu</foaf:geekcode>
+  	    <foaf:firstName>Yeong-Jin</foaf:firstName>
+  	    <foaf:lastName>Noh</foaf:lastName>
+  	    <memberOf rdf:resource="#Fnatic" />
+      </EPlayer>
+    </foaf:member>
+	<foaf:member>
+      <EPlayer rdf:ID="Noxiak">
+  	    <foaf:geekcode>Noxiak</foaf:geekcode>
+  	    <foaf:firstName>Felix</foaf:firstName>
+  	    <foaf:lastName>Lewis</foaf:lastName>
+  	    <memberOf rdf:resource="#Fnatic" />
+      </EPlayer>
+    </foaf:member>
+	<foaf:member>
+      <EPlayer rdf:ID="Spirit">
+  	    <foaf:geekcode>Spirit</foaf:geekcode>
+  	    <foaf:firstName>Lee</foaf:firstName>
+  	    <foaf:lastName>Dayun</foaf:lastName>
+  	    <memberOf rdf:resource="#Fnatic" />
+      </EPlayer>
+    </foaf:member>
+	<foaf:member>
+      <EPlayer rdf:ID="Febiven">
+  	    <foaf:geekcode>Febiven</foaf:geekcode>
+  	    <foaf:firstName>Fabian</foaf:firstName>
+  	    <foaf:lastName>Diepstraten</foaf:lastName>
+  	    <memberOf rdf:resource="#Fnatic" />
+      </EPlayer>
+    </foaf:member>
+    <foaf:member>	
+      <EPlayer rdf:ID="Rekkles">
+  	    <foaf:geekcode>Rekkles</foaf:geekcode>
+  	    <foaf:firstName>Martin</foaf:firstName>
+  	    <foaf:lastName>Larsson</foaf:lastName>
+  	    <memberOf rdf:resource="#Fnatic" />
+      </EPlayer>
+	</foaf:member>
+  </ETeam>
+  
+  <ETeam rdf:ID="&dbpedia;Team_Liquid">
+	<hasName>Team Liquid</hasName>
+	<foaf:homepage>
+	  <foaf:document rdf:ID="http://www.liquidlegends.net/" />
+	</foaf:homepage>
+	<hasWon rdf:resource="#EULCSSUMMER" />
+	<foaf:member>
+	  <EPlayer rdf:ID="Lourlo">
+        <foaf:geekcode>Lourlo</foaf:geekcode>
+        <foaf:firstName>Samson</foaf:firstName>
+        <foaf:lastName>Jackson</foaf:lastName>
+        <memberOf rdf:resource="#TeamLiquid" />
+      </EPlayer>
+	</foaf:member>
+    <foaf:member>
+	  <EPlayer rdf:ID="Dardoch">
+		<foaf:geekcode>Dardoch</foaf:geekcode>
+		<foaf:firstName>Joshua</foaf:firstName>
+		<foaf:lastName>Hartnett</foaf:lastName>
+		<memberOf rdf:resource="#TeamLiquid" />
+	  </EPlayer>
+	</foaf:member>
+    <foaf:member>	
+	  <EPlayer rdf:ID="FeniX">
+		<foaf:geekcode>FeniX</foaf:geekcode>
+		<foaf:firstName>Kim</foaf:firstName>
+		<foaf:lastName>Jae-hoon</foaf:lastName>
+		<memberOf rdf:resource="#TeamLiquid" />
+	  </EPlayer>
+	</foaf:member>
+    <foaf:member>	
+	  <EPlayer rdf:ID="Piglet">
+		<foaf:geekcode>Piglet</foaf:geekcode>
+		<foaf:firstName>Chae</foaf:firstName>
+		<foaf:lastName>Gwang-jin</foaf:lastName>
+		<memberOf rdf:resource="#TeamLiquid" />
+	  </EPlayer>
+	</foaf:member>
+    <foaf:member>	
+	  <EPlayer rdf:ID="Matt">
+		<foaf:geekcode>Matt</foaf:geekcode>
+		<foaf:firstName>Matt</foaf:firstName>
+		<foaf:lastName>Elento</foaf:lastName>
+		<memberOf rdf:resource="#TeamLiquid" />
+	  </EPlayer>
+	</foaf:member>
+  </ETeam>
+  
+  <ETeam rdf:ID="&dbpedia;Natus_Vincere">
+    <hasName>Natus Vincere</hasName>
+	<hasWon rdf:resource="#Azubu" />
+    <foaf:homepage>
+  	  <foaf:document rdf:ID="http://navi-gaming.com/en" />
+    </foaf:homepage>
+    <foaf:member>
+  	  <EPlayer rdf:ID="Jwaow">
+	    <foaf:geekcode>Jwaow</foaf:geekcode>
+	    <foaf:firstName>Jesper</foaf:firstName>
+	    <foaf:lastName>Strandgren</foaf:lastName>
+	    <memberOf rdf:resource="#NatusVincere" />
+	  </EPlayer>
+	</foaf:member>
+	<foaf:member>   
+	  <EPlayer rdf:ID="Amin">
+	    <foaf:geekcode>Amin</foaf:geekcode>
+	    <foaf:firstName>Amin</foaf:firstName>
+	    <foaf:lastName>Mezher</foaf:lastName>
+	    <memberOf rdf:resource="#NatusVincere" />
+	  </EPlayer>
+	</foaf:member>
+	<foaf:member>
+	  <EPlayer rdf:ID="SozPurefect">
+	    <foaf:geekcode>SozPurefect</foaf:geekcode>
+	    <foaf:firstName>Hicham</foaf:firstName>
+	    <foaf:lastName>Tazrhini</foaf:lastName>
+	    <memberOf rdf:resource="#NatusVincere" />
+	  </EPlayer>
+	</foaf:member>
+	<foaf:member>
+	  <EPlayer rdf:ID="EXORKK">
+	    <foaf:geekcode>EXORKK</foaf:geekcode>
+	    <foaf:firstName>Sébastien</foaf:firstName>
+	    <foaf:lastName>Lamorte</foaf:lastName>
+	    <memberOf rdf:resource="#NatusVincere" />
+	  </EPlayer>		
+    </foaf:member>
+    <foaf:member>	
+	  <EPlayer rdf:ID="MounTain">
+	    <foaf:geekcode>MounTain</foaf:geekcode>
+	    <foaf:firstName>Patrick</foaf:firstName>
+	    <foaf:lastName>Dasberg</foaf:lastName>
+	    <memberOf rdf:resource="#NatusVincere" />
+	  </EPlayer>
+    </foaf:member> 
+    <foaf:member>	
+	  <EPlayer rdf:ID="Czaru">
+	    <foaf:geekcode>Czaru</foaf:geekcode>
+	    <foaf:firstName>Krystian</foaf:firstName>
+	    <foaf:lastName>Przybylski</foaf:lastName>
+	    <memberOf rdf:resource="#NatusVincere" />
+	  </EPlayer>
+    </foaf:member>
+  </ETeam>
+  
+  <ETeam rdf:ID="&dbpedia;SK_Gaming">
+	<hasName>SKGaming</hasName>
+	<hasWon rdf:resource="#IEMSeasonIX" />
+	<hasWon rdf:resource="#EULCSSpringPromo" />
+	<foaf:homepage>
+      <foaf:document rdf:ID="http://www.sk-gaming.com/" />
+	</foaf:homepage>
+	<foaf:member>
+      <EPlayer rdf:ID="Morsu">
+        <foaf:geekcode>Morsu</foaf:geekcode>
+        <foaf:firstName>Bram</foaf:firstName>
+        <foaf:lastName>Knol</foaf:lastName>
+        <memberOf rdf:resource="#SKGaming" />
+      </EPlayer>
+    </foaf:member>
+    <foaf:member>	
+      <EPlayer rdf:ID="Dokgo">
+        <foaf:geekcode>Dokgo</foaf:geekcode>
+        <foaf:firstName>Kim</foaf:firstName>
+        <foaf:lastName>Kyeong-tak</foaf:lastName>
+        <memberOf rdf:resource="#SKGaming" />
+      </EPlayer>
+    </foaf:member>
+    <foaf:member>	
+      <EPlayer rdf:ID="SuNo">
+        <foaf:geekcode>SuNo</foaf:geekcode>
+        <foaf:firstName>An</foaf:firstName>
+        <foaf:lastName>Sun-ho</foaf:lastName>
+        <memberOf rdf:resource="#SKGaming" />
+      </EPlayer>
+    </foaf:member>
+    <foaf:member>	
+      <EPlayer rdf:ID="Vardags">
+        <foaf:geekcode>Vardags</foaf:geekcode>
+        <foaf:firstName>Pontus</foaf:firstName>
+        <foaf:lastName>Dahlblom</foaf:lastName>
+        <memberOf rdf:resource="#SKGaming" />
+      </EPlayer>
+    </foaf:member>
+    <foaf:member>	
+      <EPlayer rdf:ID="Unlimited">
+        <foaf:geekcode>Unlimited</foaf:geekcode>
+        <foaf:firstName>Petar</foaf:firstName>
+        <foaf:lastName>Georgiev</foaf:lastName>
+        <memberOf rdf:resource="#SKGaming" />
+      </EPlayer>
+	</foaf:member>
+  </ETeam>
+</rdf:RDF>

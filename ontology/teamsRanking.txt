@@ -1,0 +1,13 @@
+prefix esports: <http://www.eitel-lopez.org/e-sports#>
+prefix foaf: <http://xmlns.com/foaf/0.1/#>
+
+select ?esportName ?teamName (sum(?points) as ?totalPoints) (count(?player) as ?totalPlayers) where
+{
+  ?competition esports:isECompetitionOf ?esport.
+  ?esport esports:hasName ?esportName.
+  ?team esports:hasWon ?competition;
+            foaf:member ?player;
+            esports:hasName  ?teamName.
+  ?competition esports:hasPoints ?points.
+}
+group by ?esport ?team
