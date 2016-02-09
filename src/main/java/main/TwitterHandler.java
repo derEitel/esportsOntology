@@ -21,8 +21,6 @@ public class TwitterHandler {
 	public Response getTweetsByName(@PathParam("name") String name) {
 		TwitterAPIConsumer consumer = new TwitterAPIConsumer();
 		List<Status> tweets = consumer.getTweets(name);
-		//String[] result = new String[10];
-		String text = "";
 		if(tweets.isEmpty()){
 			return Response.status(200).entity("No tweets for that keyword").build();
 		} else{

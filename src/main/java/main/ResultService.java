@@ -1,10 +1,16 @@
 package main;
 
 import main.Result;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import fr.inria.acacia.corese.exceptions.EngineException;
 import fr.inria.edelweiss.kgram.core.Mappings;
@@ -19,17 +25,26 @@ import org.json.JSONObject;
 import org.json.XML;
 
 public class ResultService {
-
+	private Graph g;
+	private JSONObject competitions;
+	private JSONObject teams;
+	
     public Result getDefaultResult() {
+        if (g==null)
+        	initializeGraph();
+        
+        this.competitions = queryJSON("competitionsQuery.txt");
+        this.teams = queryJSON("teamsQuery.txt");
+        
         Result user = new Result();
-        user.setCompetitions(queryJSON("competitionsQuery.txt").toString());
-        user.setTeams(queryJSON("teamsQuery.txt").toString());
+        user.setCompetitions(competitions.toString());
+        user.setTeams(teams.toString());
 
         return user;
     }
 
-    public JSONObject queryJSON(String path) {
-		Graph g = Graph.create(true);
+    public void initializeGraph() {
+		this.g = Graph.create(true);
 		Load ld = Load.create(g);
 		try {
 			ld.loadWE("ontology/event.ttl");
@@ -39,7 +54,9 @@ public class ResultService {
 		} catch (LoadException le) {
 			System.out.println("Error loading: " + le.toString());
 		}
-		
+    }
+    
+	public JSONObject queryJSON(String path) {
 		String query = "";
 		try {
 			query = new String(Files.readAllBytes(Paths
@@ -92,7 +109,9 @@ public class ResultService {
 				newValue.put(key, value);
 			}
 			resultsArray.put(newValue);
+
 		}
+		
 		return new JSONObject().put("data", resultsArray);
 	}
 }
