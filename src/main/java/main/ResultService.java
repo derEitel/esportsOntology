@@ -5,6 +5,7 @@ import main.Result;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.Iterator;
 
 import javax.ws.rs.GET;
@@ -23,6 +24,12 @@ import fr.inria.edelweiss.kgtool.print.ResultFormat;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
+
+import com.flickr4java.flickr.Flickr;
+import com.flickr4java.flickr.FlickrException;
+import com.flickr4java.flickr.REST;
+import com.flickr4java.flickr.photos.SearchParameters;
+import com.flickr4java.flickr.test.TestInterface;
 
 public class ResultService {
 	private Graph g;
@@ -107,10 +114,29 @@ public class ResultService {
 				
 				newValue.put(key, value);
 			}
+			newValue.put("photo", flickr(newValue.get("name").toString()));
 			resultsArray.put(newValue);
 
 		}
 		
 		return new JSONObject().put("data", resultsArray);
 	}
+	
+	public String flickr (String name) {
+    	String apiKey = "6fe5dffa0292b31684a2c21b9199e733";
+    	String sharedSecret = "65058d771d850a7a";
+    	Flickr f = new Flickr(apiKey, sharedSecret, new REST());
+    	
+    	String url="";
+    	try{
+    		SearchParameters sp = new SearchParameters ();
+    		sp.setText(name);
+    		url = f.getPhotosInterface().search(sp, 0, 0).get(0).getSmall320Url();
+		} catch (FlickrException fe) {
+			System.out.println("Flickr: "+fe.toString());
+		} catch (Exception e) {
+			System.out.println("Flickr parsing: "+e.toString());
+		}
+    	return url;
+    }
 }
