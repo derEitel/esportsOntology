@@ -20,15 +20,13 @@ public class CompetitionHandler {
     	ResultService resultService = new ResultService();
 		Iterator<Object> iter = new JSONObject(resultService.getDefaultResult().getCompetitions()).getJSONArray("data").iterator();
 
-		System.out.println("nombre: "+name);
 		JSONObject competition = null;
 		while(iter.hasNext() && competition==null) {
 			JSONObject temp = (JSONObject)iter.next();
-			System.out.println("temporal: "+temp);
+			
 			if (temp.get("name").equals(name))
 				competition = temp;
 		}
-		System.out.println("resultado: "+competition.toString());
 		return Response.status(200).entity(competition.toString()).build();
     }
 }

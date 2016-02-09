@@ -26,7 +26,7 @@ public class TeamHandler {
 			if (temp.get("name").equals(name))
 				team = temp;
 		}
-		System.out.println("resultado: "+team.toString());
+		
 		return Response.status(200).entity(team.toString()).build();
     }
 }

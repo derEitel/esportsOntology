@@ -50,7 +50,6 @@ public class ResultService {
 			ld.loadWE("ontology/event.ttl");
 			ld.loadWE("ontology/esports.rdf");
 
-			System.out.println("Alright");
 		} catch (LoadException le) {
 			System.out.println("Error loading: " + le.toString());
 		}

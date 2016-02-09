@@ -20,6 +20,7 @@ public class TwitterHandler {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getTweetsByName(@PathParam("name") String name) {
 		TwitterAPIConsumer consumer = new TwitterAPIConsumer();
+		
 		List<Status> tweets = consumer.getTweets(name);
 		if(tweets.isEmpty()){
 			return Response.status(200).entity("No tweets for that keyword").build();

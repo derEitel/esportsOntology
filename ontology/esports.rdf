@@ -547,7 +547,7 @@
   </owl:AllDifferent>
   
   <ECompetition rdf:ID="EULCSSPRING">
-    <hasName>2015 NA LCS Spring Split</hasName>
+    <hasName>NA LCS Spring</hasName>
 	<hasDescription>
 	  The NA Spring Finals weekend kicks off with the battle for 
 	  3rd place on Saturday, April 16. Then, we’ll switch over to 
@@ -604,7 +604,7 @@
   </ECompetition>
   
   <ECompetition rdf:ID="EUNASUMMER">
-    <hasName>2015 NA LCS Summer Split</hasName>
+    <hasName>NA LCS</hasName>
 	<hasDescription>
 	  In the event that multiple teams are tied in the standings at the conclusion 
 	  of the Summer Split, then the team that gained the most points in the Summer 
@@ -629,7 +629,7 @@
   </ECompetition>
   
   <ECompetition rdf:ID="Azubu">
-    <hasName>Azubu The Champions Summer 2012</hasName>
+    <hasName>Azubu</hasName>
 	<hasDescription>
 	  Azubu Blaze, formerly named MiG Blaze, is one of two squads sponsored 
 	  by German media group Azubu. They were added to Maximum impact Gaming's 
@@ -654,7 +654,7 @@
   </ECompetition>
   
   <ECompetition rdf:ID="EULCSSpringPromo">
-    <hasName>2016 EU LCS Spring Promo</hasName>
+    <hasName>EU LCS Spring</hasName>
 	<hasDescription>
 	  2 Challenger Teams are matched up with 8th and 9th place 
 	  LCS teams, and the winners make it to Summer Split
@@ -676,7 +676,7 @@
   </ECompetition>
   
   <ECompetition rdf:ID="IEMSeasonIX">
-    <hasName>IEM Season IX</hasName>
+    <hasName>IEM Season</hasName>
 	<hasDescription>
 	  The Intel Extreme Masters is ESL's flagship competition sponsored by Intel. 
 	  IEM is a huge tournament spanning many months and individual competitions culminating in the 
@@ -734,7 +734,6 @@
 	<hasWeb>http://www.fnatic.com</hasWeb>
 	<playInConsole rdf:resource="#PS2" />
 	<hasWon rdf:resource="#EULCSSPRING" />
-	<hasWon rdf:resource="#EULCSSUMMER" />
 	<foaf:member>
 	  <EPlayer rdf:ID="Gamsu">
   	    <foaf:geekcode>Gamsu</foaf:geekcode>
