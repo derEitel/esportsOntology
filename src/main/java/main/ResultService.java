@@ -40,8 +40,11 @@ public class ResultService {
         if (g==null)
         	initializeGraph();
         
-        this.competitions = queryJSON("competitionsQuery.txt");
-        this.teams = queryJSON("teamsQuery.txt");
+        if (competitions==null)
+        	this.competitions = queryJSON("competitionsQuery.txt");
+        
+        if (teams==null)
+        	this.teams = queryJSON("teamsQuery.txt");
         
         Result user = new Result();
         user.setCompetitions(competitions.toString());
