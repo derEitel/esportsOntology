@@ -17,16 +17,26 @@ public class CompetitionHandler {
 	@Path("{name}")
 	@Produces(MediaType.APPLICATION_JSON)
     public Response getTeam (@PathParam("name") String name) {
-    	ResultService resultService = new ResultService();
-		Iterator<Object> iter = new JSONObject(resultService.getDefaultResult().getCompetitions()).getJSONArray("data").iterator();
+		long t0 = System.currentTimeMillis();
+		
+		Iterator<Object> iter = new JSONObject(ResultService.getCompetitions()).getJSONArray("data").iterator();
 
 		JSONObject competition = null;
 		while(iter.hasNext() && competition==null) {
 			JSONObject temp = (JSONObject)iter.next();
 			
-			if (temp.get("name").equals(name))
+			if (temp.get("name").equals(name)) {
 				competition = temp;
+				//picture retrieval.
+				competition.put("photo",ResultService.searchFlickr(name));
+				System.out.println("The photo of the competitions is: "+competition.getString("photo"));
+			}
 		}
-		return Response.status(200).entity(competition.toString()).build();
+		Response response = Response.status(200).entity(competition.toString()).build();
+		
+		long t1 = System.currentTimeMillis();
+    	System.out.println("Time to retrieve a competition by name : "+(t1-t0));
+    	
+    	return response;
     }
 }

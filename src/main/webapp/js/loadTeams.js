@@ -5,9 +5,7 @@ function loadTeam(table, json) {
         "ajax": {
             "url" : json,
             "dataSrc": function ( json ) {
-            	json = json.teams;
-            	
-            	json = JSON.parse(json);
+            	//json = JSON.parse(json);
        
       for ( var i=0, ien=json.data.length ; i<ien ; i++ ) {
           

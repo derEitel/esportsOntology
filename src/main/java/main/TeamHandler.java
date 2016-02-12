@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 @Path("/team")
@@ -17,16 +18,25 @@ public class TeamHandler {
 	@Path("{name}")
 	@Produces(MediaType.APPLICATION_JSON)
     public Response getTeam (@PathParam("name") String name) {
-    	ResultService resultService = new ResultService();
-		Iterator<Object> iter = new JSONObject(resultService.getDefaultResult().getTeams()).getJSONArray("data").iterator();
+		long t0 = System.currentTimeMillis();
+		
+		Iterator<Object> iter = new JSONObject(ResultService.getTeams()).getJSONArray("data").iterator();
 
 		JSONObject team = null;
 		while(iter.hasNext() && team==null) {
 			JSONObject temp = (JSONObject)iter.next();
-			if (temp.get("name").equals(name))
+			if (temp.get("name").equals(name)) {
 				team = temp;
+				//picture retrieval.
+				team.put("photo",ResultService.searchFlickr(name));
+			}
 		}
 		
-		return Response.status(200).entity(team.toString()).build();
+		Response response = Response.status(200).entity(team.toString()).build();
+		
+		long t1 = System.currentTimeMillis();
+    	System.out.println("Time to retrieve a team by name : "+(t1-t0));
+		
+		return response;
     }
 }

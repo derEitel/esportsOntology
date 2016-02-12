@@ -1,17 +1,10 @@
 package main;
 
-import main.Result;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collection;
 import java.util.Iterator;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import fr.inria.acacia.corese.exceptions.EngineException;
 import fr.inria.edelweiss.kgram.core.Mappings;
@@ -29,32 +22,61 @@ import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.REST;
 import com.flickr4java.flickr.photos.SearchParameters;
-import com.flickr4java.flickr.test.TestInterface;
 
 public class ResultService {
-	private Graph g;
-	private JSONObject competitions;
-	private JSONObject teams;
+	private static Graph g;
+	private static JSONObject competitions;
+	private static JSONObject teams;
+	private static Flickr flickr;
 	
-    public Result getDefaultResult() {
-        if (g==null)
+	public static String getTeams () {
+		initializeTeams();
+		
+		return teams.toString();
+	}
+	
+	public static String getCompetitions () {
+		initializeCompetitions();
+		
+		return competitions.toString();
+	}
+	
+    private static void initializeCompetitions() {
+        if (g==null){
+        	long t0 = System.currentTimeMillis();
         	initializeGraph();
+        	long t1 = System.currentTimeMillis();
+        	System.out.println("Time to initialize the graph (competitions): "+(t1-t0));
+        }
+        	
         
-        if (competitions==null)
-        	this.competitions = queryJSON("competitionsQuery.txt");
-        
-        if (teams==null)
-        	this.teams = queryJSON("teamsQuery.txt");
-        
-        Result user = new Result();
-        user.setCompetitions(competitions.toString());
-        user.setTeams(teams.toString());
-
-        return user;
+        if (competitions==null) {
+        	long t0 = System.currentTimeMillis();
+        	competitions = queryJSON("competitionsQuery.txt");
+        	long t1 = System.currentTimeMillis();
+        	System.out.println("Time to query (competitions): "+(t1-t0));
+        }
+        	
+    }
+    
+    private static void initializeTeams () {
+    	if (g==null){
+        	long t0 = System.currentTimeMillis();
+        	initializeGraph();
+        	long t1 = System.currentTimeMillis();
+        	System.out.println("Time to initialize the graph (teams): "+(t1-t0));
+        }
+    	
+        if (teams==null) {
+        	long t0 = System.currentTimeMillis();
+        	teams = queryJSON("teamsQuery.txt");
+        	long t1 = System.currentTimeMillis();
+        	System.out.println("Time to query (teams): "+(t1-t0));
+        }
     }
 
-    public void initializeGraph() {
-		this.g = Graph.create(true);
+    private static void initializeGraph() {
+		g = Graph.create(true);
 		Load ld = Load.create(g);
 		try {
 			ld.loadWE("ontology/event.ttl");
@@ -65,7 +87,7 @@ public class ResultService {
 		}
     }
     
-	public JSONObject queryJSON(String path) {
+	private static JSONObject queryJSON(String path) {
 		String query = "";
 		try {
 			query = new String(Files.readAllBytes(Paths
@@ -114,32 +136,45 @@ public class ResultService {
 				} catch (Exception e) {
 					System.out.println("Exception while parsing the content: "+e.toString());
 				}
-				
 				newValue.put(key, value);
 			}
-			newValue.put("photo", flickr(newValue.get("name").toString()));
 			resultsArray.put(newValue);
-
 		}
 		
 		return new JSONObject().put("data", resultsArray);
 	}
 	
-	public String flickr (String name) {
-    	String apiKey = "6fe5dffa0292b31684a2c21b9199e733";
-    	String sharedSecret = "65058d771d850a7a";
-    	Flickr f = new Flickr(apiKey, sharedSecret, new REST());
-    	
+	public static String searchFlickr (String name) {    
+		initializeFlickr();
+		
+		long t0 = System.currentTimeMillis();
+		
     	String url="";
     	try{
     		SearchParameters sp = new SearchParameters ();
     		sp.setText(name);
-    		url = f.getPhotosInterface().search(sp, 0, 0).get(0).getSmall320Url();
+    		url = flickr.getPhotosInterface().search(sp, 1, 0).get(0).getSmall320Url();
 		} catch (FlickrException fe) {
 			System.out.println("Flickr: "+fe.toString());
 		} catch (Exception e) {
 			System.out.println("Flickr parsing: "+e.toString());
 		}
+    	
+    	long t1 = System.currentTimeMillis();
+    	System.out.println("Time to query flickr : "+(t1-t0));
+    	
     	return url;
     }
+	
+	private static void initializeFlickr () {
+		final String apiKey = "6fe5dffa0292b31684a2c21b9199e733";
+    	final String sharedSecret = "65058d771d850a7a";
+    	
+    	if (flickr==null) {
+    		long t0 = System.currentTimeMillis();
+    		flickr = new Flickr(apiKey, sharedSecret, new REST());
+        	long t1 = System.currentTimeMillis();
+        	System.out.println("Time to initialize flickr : "+(t1-t0));
+    	}
+	}
 }

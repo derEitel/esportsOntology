@@ -8,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import twitter4j.Status;
+
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -19,15 +20,23 @@ public class TwitterHandler {
 	@Path("{name}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getTweetsByName(@PathParam("name") String name) {
+		long t0 = System.currentTimeMillis();
+		
 		TwitterAPIConsumer consumer = new TwitterAPIConsumer();
 		
 		List<Status> tweets = consumer.getTweets(name);
-		if(tweets.isEmpty()){
-			return Response.status(200).entity("No tweets for that keyword").build();
+		Response response;
+		if(tweets==null || tweets.isEmpty()){
+			response = Response.status(200).entity("No tweets for that keyword").build();
 		} else{
 	        String json = new Gson().toJson(tweets);
-			return Response.status(200).entity(json).build();
+			response = Response.status(200).entity(json).build();
 		}
+		
+		long t1 = System.currentTimeMillis();
+    	System.out.println("Time to retrieve a competition by name : "+(t1-t0));
+    	
+    	return response;
 	}
 
 }

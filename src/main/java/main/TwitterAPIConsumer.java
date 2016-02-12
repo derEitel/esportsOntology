@@ -1,6 +1,5 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import twitter4j.Query;
@@ -32,8 +31,6 @@ public class TwitterAPIConsumer {
             QueryResult result;
             query.count(10);
             
-           
-            
             result = twitter.search(query);
             List<Status> tweets = result.getTweets();
 
@@ -47,4 +44,3 @@ public class TwitterAPIConsumer {
     }
 
 }
-
